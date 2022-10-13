@@ -11,14 +11,24 @@ float points[] = {
    0.5f,  0.5f,  0.0f
 };
 
-JREngine::Vector3 colors[] = {
-	{1,0,0},
-	{0,1,0},
-	{0,0,1},
-	{0,1,1},
-	{1,0,1},
-	{1,1,1}
-};
+//glm::vec3 colors[] = {
+//	{1,0,0},
+//	{0,1,0},
+//	{0,0,1},
+//	{0,1,1},
+//	{1,0,1},
+//	{1,1,1}
+//};
+
+/*glm::vec2 texCoords[]{
+	{0, 0},
+	{0, 1),
+	{1, 0},
+	{0, 1},
+	{1, 1},
+	{1, 0}
+}
+*/
 
 const char* vertex_shader =
 "#version 430 core\n"
@@ -36,13 +46,16 @@ const char* fragment_shader =
 
 int main(int argc, char** argv)
 {
+	LOG("Application started...");
 	JREngine::InitializeMemory();
 	JREngine::SetFilePath("../Assets");
 
 	JREngine::Engine::Instance().Initialize();
 	JREngine::Engine::Instance().Register();
+	LOG("Engine initialized...");
 
 	JREngine::g_renderer.CreateWindow("Game", 800, 600);
+	LOG("Window created...");
 
 	//pos
 	GLuint pvbo = 0;
@@ -53,7 +66,12 @@ int main(int argc, char** argv)
 	GLuint cvbo = 0;
 	glGenBuffers(1, &cvbo);
 	glBindBuffer(GL_ARRAY_BUFFER, cvbo);
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(JREngine::Vector3), colors, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(glm::vec3), colors, GL_STATIC_DRAW);
+
+	GLuint tvbo = 0;
+	glGenBuffers(1, &tvbo);
+	glBindBuffer(GL_ARRAY_BUFFER, tvbo);
+	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(glm::vec2), colors, GL_STATIC_DRAW);
 
 	//vertex array
 	GLuint vao = 0;
@@ -67,6 +85,10 @@ int main(int argc, char** argv)
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, cvbo);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	glEnableVertexAttribArray(2);
+	glBindBuffer(GL_ARRAY_BUFFER, tvbo);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
 	std::shared_ptr<JREngine::Shader> vs = JREngine::g_resources.Get<JREngine::Shader>("Shaders/basic.vert", GL_VERTEX_SHADER);
 	std::shared_ptr<JREngine::Shader> fs = JREngine::g_resources.Get<JREngine::Shader>("Shaders/basic.frag", GL_FRAGMENT_SHADER);
