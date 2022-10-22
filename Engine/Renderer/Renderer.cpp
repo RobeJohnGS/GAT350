@@ -59,7 +59,7 @@ namespace JREngine
 	{
 		//SDL_SetRenderDrawColor(m_renderer, m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
 		//SDL_RenderClear(m_renderer);
-		glClearColor(0.53f, 0.81f, 0.98f, 1);
+		glClearColor(0.0f, 0.0f, 0.0f, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
@@ -109,7 +109,7 @@ namespace JREngine
 
 		SDL_Point center{ (int)origin.x, (int)origin.y };
 				
-		SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, angle, &center, SDL_FLIP_NONE);
+		//SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, angle, &center, SDL_FLIP_NONE);
 	}
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration)
@@ -128,7 +128,7 @@ namespace JREngine
 
 		SDL_Point center{ (int)origin.x, (int)origin.y };
 
-		SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
+		//SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
 	}
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration, bool flipH)
@@ -156,7 +156,7 @@ namespace JREngine
 		SDL_Point center{ (int)origin.x, (int)origin.y };
 
 		SDL_RendererFlip flip = (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
-		SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, math::RadToDeg(mx.GetRotation()), &center, flip);
+		//SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, math::RadToDeg(mx.GetRotation()), &center, flip);
 	}
 
 }

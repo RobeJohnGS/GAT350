@@ -15,7 +15,8 @@ namespace JREngine {
 		std::string source;
 		bool success = ReadFile(filename, source);
 		if (!success) {
-			//log
+			LOG("could not crate shader (%s)", filename);
+			return false;
 		}
 
 		va_list args;

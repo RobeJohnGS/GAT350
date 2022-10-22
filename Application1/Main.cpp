@@ -3,32 +3,83 @@
 
 //format
 float points[] = {
-  -0.5f, -0.5f,  0.0f,
+  /*-0.5f, -0.5f,  0.0f,
   -0.5f,  0.5f,  0.0f,
    0.5f,  0.5f,  0.0f,
    0.5f, -0.5f,  0.0f,
   -0.5f, -0.5f,  0.0f,
-   0.5f,  0.5f,  0.0f
+   0.5f,  0.5f,  0.0f*/
+	-1.0f, -1.0f, 0.0f,
+	-1.0f,  1.0f, 0.0f,
+	 1.0f, -1.0f, 0.0f,
+
+	 -1.0f, 1.0f, 0.0f,
+	  1.0f, 1.0f, 0.0f,
+	  1.0f,-1.0f, 0.0f
 };
 
-//glm::vec3 colors[] = {
-//	{1,0,0},
-//	{0,1,0},
-//	{0,0,1},
-//	{0,1,1},
-//	{1,0,1},
-//	{1,1,1}
-//};
+float vertices[] = {
+	-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
 
-/*glm::vec2 texCoords[]{
+	-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+
+	-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+
+	-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+	-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+
+	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f
+};
+
+glm::vec3 colors[] = {
+	{1,0,0},
+	{0,1,0},
+	{0,0,1},
+	{0,1,1},
+	{1,0,1},
+	{1,1,1}
+};	
+
+glm::vec2 texCoords[]{
 	{0, 0},
-	{0, 1),
+	{0, 1},
 	{1, 0},
 	{0, 1},
 	{1, 1},
 	{1, 0}
-}
-*/
+};
+
 
 const char* vertex_shader =
 "#version 430 core\n"
@@ -71,12 +122,19 @@ int main(int argc, char** argv)
 	GLuint tvbo = 0;
 	glGenBuffers(1, &tvbo);
 	glBindBuffer(GL_ARRAY_BUFFER, tvbo);
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(glm::vec2), colors, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(glm::vec2), texCoords, GL_STATIC_DRAW);
+
+	/*GLuint vbo = 0;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);*/
 
 	//vertex array
 	GLuint vao = 0;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
+
+	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, pvbo);
@@ -90,30 +148,29 @@ int main(int argc, char** argv)
 	glBindBuffer(GL_ARRAY_BUFFER, tvbo);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
-	std::shared_ptr<JREngine::Shader> vs = JREngine::g_resources.Get<JREngine::Shader>("Shaders/basic.vert", GL_VERTEX_SHADER);
-	std::shared_ptr<JREngine::Shader> fs = JREngine::g_resources.Get<JREngine::Shader>("Shaders/basic.frag", GL_FRAGMENT_SHADER);
+	std::shared_ptr<JREngine::Program> program = JREngine::g_resources.Get<JREngine::Program>("Shaders/basic.prog", GL_PROGRAM);
+	program->Link();
+	program->Use();
 
-	GLuint program = glCreateProgram();
+	//create material
+	std::shared_ptr<JREngine::Material> material = JREngine::g_resources.Get<JREngine::Material>("Materials/box.mtrl");
+	material->Bind();
 
-	glAttachShader(program, fs->m_shader);
-	glAttachShader(program, vs->m_shader);
-	glLinkProgram(program);
-	glUseProgram(program);
+	glm::mat4 mx{ 1 };
+	mx = glm::scale(glm::vec3{ 0.5f, 0.5f, 0.5f });
+	material->GetProgram()->SetUniform("scale", 0.5f);
+	//material->GetProgram()->SetUniform("tint", glm::vec3{ 1, 0, 0 });
+	material->GetProgram()->SetUniform("transform", mx);
+	/*material->GetProgram()->SetUniform("scale", std::sin(JREngine::g_time.time * 3));
+	material->GetProgram()->SetUniform("transform", mx);*/
 
 
-	//other gl stuff but
-	// create uniform2 for the tint
-	// uniform 3 is transform
-	GLint uniform1 = glGetUniformLocation(program, "scale");
-	GLint uniform2 = glGetUniformLocation(program, "tint");
-	GLint uniform3 = glGetUniformLocation(program, "transformation");
 
-	glUniform3f(uniform2, 1, 1, 1);
 
-	//glm::mat4 mx{ 1 };
-	////mx = glm::scale(glm::vec3{0.5, 0.5, 0.5});
-	//mx - glm::eulerAngleXYZ;
-	//glUniformMatrix4fv(uniform3, 1, GL_FALSE, glm::value_ptr(mx));
+	//glm::mat4 model{ 1 };
+	////bring view into loop, make camera position and change the first thing
+	//glm::mat4 view = glm::lookAt(glm::vec3{ 0, 0, 3 }, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0});
+	//glm::mat4 projection = glm::perspective(45.0f, JREngine::g_renderer.GetWidth() / (float)JREngine::g_renderer.GetHeight(), 0.01f, 100.0f);
 
 	bool quit = false;
 	while (!quit) {
@@ -122,8 +179,17 @@ int main(int argc, char** argv)
 		if (JREngine::g_inputSystem.GetKeyState(JREngine::key_escape) == JREngine::InputSystem::KeyState::Pressed) {
 			quit = true;
 		}
-		
-		glUniform1f(uniform1, 0.8f);
+
+		glUniform1f(material->GetProgram()->m_uniforms["scale"], std::sin(JREngine::g_time.time * 2.5f));
+
+		/*model = glm::eulerAngleXYZ(0.0f, JREngine::g_time.time, 0.0f);
+		glm::mat4 mvp = projection * view * model;*/
+
+		mx = glm::eulerAngleXYZ(0.0f, 0.0f, JREngine::g_time.time);
+
+
+		//material->GetProgram()->SetUniform("mvp", mvp);
+		glUniformMatrix4fv(material->GetProgram()->m_uniforms["transform"], 1, GL_FALSE, glm::value_ptr(mx));
 
 		JREngine::g_renderer.BeginFrame();
 
