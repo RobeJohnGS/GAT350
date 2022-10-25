@@ -1,63 +1,91 @@
-#include "Program.h"
-#include "Engine.h"
+#include "Program.h" 
+#include "../Engine.h" 
 
-namespace JREngine {
-    Program::~Program(){
-        if (m_program) {
+namespace JREngine
+{
+    Program::~Program()
+    {
+        if (m_program)
+        {
             glDeleteProgram(m_program);
         }
     }
 
-    bool Program::Create(std::string name, ...){
+    bool Program::Create(std::string filename, ...)
+    {
+        // load program json document 
         rapidjson::Document document;
-        bool success = JREngine::json::Load(name, document);
-        if (!success) {
-            LOG("could not create program (%s)", name);
+        bool success = JREngine::json::Load(filename, document);
+        if (!success)
+        {
+
+            LOG("Could not load program file (%s).", filename.c_str());
             return false;
         }
 
+        // create program 
         m_program = glCreateProgram();
+
+        // get/add vertex shader 
         std::string vertex_shader;
         READ_DATA(document, vertex_shader);
-        if (!vertex_shader.empty()) {
+        if (!vertex_shader.empty())
+        {
+
             auto vshader = g_resources.Get<JREngine::Shader>(vertex_shader, GL_VERTEX_SHADER);
             AddShader(vshader);
         }
-        std::string frag_shader;
-        READ_DATA(document, frag_shader);
-        if (!frag_shader.empty()) {
-            auto fshader = g_resources.Get<JREngine::Shader>(frag_shader, (void*)GL_FRAGMENT_SHADER);
+
+        // get/add fragment shader 
+        std::string fragment_shader;
+        READ_DATA(document, fragment_shader);
+        if (!fragment_shader.empty())
+        {
+
+            auto fshader = g_resources.Get<JREngine::Shader>(fragment_shader, (void*)GL_FRAGMENT_SHADER);
             AddShader(fshader);
         }
+        Link();
         return true;
     }
 
-    void Program::AddShader(const std::shared_ptr<Shader>& shader){
+    void Program::AddShader(const std::shared_ptr<Shader>& shader)
+    {
         m_shaders.push_back(shader);
+
         glAttachShader(m_program, shader->m_shader);
     }
 
-    void Program::Link(){
+    void Program::Link()
+    {
+        // link shader programs 
         glLinkProgram(m_program);
+
+        // check program link status 
         GLint status;
         glGetProgramiv(m_program, GL_LINK_STATUS, &status);
-        if (status == GL_FALSE) {
+        if (status == GL_FALSE)
+        {
             GLint length = 0;
             glGetProgramiv(m_program, GL_INFO_LOG_LENGTH, &length);
-            if (length > 0) {
+
+            if (length > 0)
+            {
                 std::string infoLog(length, ' ');
+
                 glGetProgramInfoLog(m_program, length, &length, &infoLog[0]);
-                //double log
-                LOG("FAILED TO LINK PROGRAM");
-                LOG("Program info %s", infoLog.c_str());
+
+                LOG("Failed to link program.");
+                LOG("Program Info: %s", infoLog.c_str());
             }
 
             glDeleteProgram(m_program);
             m_program = 0;
         }
-        
     }
-    void Program::Use(){
+
+    void Program::Use()
+    {
         glUseProgram(m_program);
     }
 
