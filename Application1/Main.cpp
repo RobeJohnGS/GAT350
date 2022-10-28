@@ -1,24 +1,51 @@
-#include "Engine.h"
-#include <iostream>
+#include "Engine.h" 
+#include <iostream> 
 
-//format
 float points[] = {
-  /*-0.5f, -0.5f,  0.0f,
-  -0.5f,  0.5f,  0.0f,
-   0.5f,  0.5f,  0.0f,
-   0.5f, -0.5f,  0.0f,
-  -0.5f, -0.5f,  0.0f,
-   0.5f,  0.5f,  0.0f*/
-	-1.0f, -1.0f, 0.0f,
-	-1.0f,  1.0f, 0.0f,
-	 1.0f, -1.0f, 0.0f,
+	/*-0.5f, -0.5f,  0.0f,
+	 0.5f,  0.5f,  0.0f,
+	 0.5f, -0.5f,  0.0f,
+	 1.5f,  0.5f,  0.0f,
+	 1.5f,  0.5f,  0.0f,
+	 1.5f, -0.5f,  0.0f*/
 
-	 -1.0f, 1.0f, 0.0f,
-	  1.0f, 1.0f, 0.0f,
-	  1.0f,-1.0f, 0.0f
+	 /* -0.5f, -0.5f,  0.0f,
+	  -0.5f,  0.5f,  0.0f,
+	   0.5f,  0.5f,  0.0f,
+	   0.5f, -0.5f,  0.0f,
+	  -0.5f, -0.5f,  0.0f,
+	   0.5f,  0.5f,  0.0f*/
+
+		-1.0f, -1.0f, 0.0f,
+		-1.0f,  1.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f,
+
+		 -1.0f, 1.0f, 0.0f,
+		  1.0f, 1.0f, 0.0f,
+		  1.0f,-1.0f, 0.0f
+
 };
 
-float vertices[] = {
+glm::vec3 colors[] = {
+	{1,0,0},
+	{0,1,0},
+	{0,0,1},
+	{0,1,1},
+	{1,0,1},
+	{1,1,1}
+};
+
+glm::vec2 texcoords[] = {
+
+	{ 0, 0 },
+	{ 0, 1 },
+	{ 1, 0 },
+	{ 0, 1 },
+	{ 1, 1 },
+	{ 1, 0 }
+};
+
+float vertices[] = { // Each Group = 1 Face Of The Cube
 	-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
 	 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
 	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
@@ -62,25 +89,6 @@ float vertices[] = {
 	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f
 };
 
-glm::vec3 colors[] = {
-	{1,0,0},
-	{0,1,0},
-	{0,0,1},
-	{0,1,1},
-	{1,0,1},
-	{1,1,1}
-};	
-
-glm::vec2 texCoords[]{
-	{0, 0},
-	{0, 1},
-	{1, 0},
-	{0, 1},
-	{1, 1},
-	{1, 0}
-};
-
-
 const char* vertex_shader =
 "#version 430 core\n"
 "in vec3 position;"
@@ -97,107 +105,80 @@ const char* fragment_shader =
 
 int main(int argc, char** argv)
 {
-	LOG("Application started...");
+	LOG("Application Started...");
+
 	JREngine::InitializeMemory();
 	JREngine::SetFilePath("../Assets");
 
 	JREngine::Engine::Instance().Initialize();
 	JREngine::Engine::Instance().Register();
-	LOG("Engine initialized...");
+	LOG("Engine Initialized...");
 
-	JREngine::g_renderer.CreateWindow("Game", 800, 600);
-	LOG("Window created...");
+	JREngine::g_audioSystem.Initialize();
+	LOG("Audio System Initialized...");
 
-	//pos
-	GLuint pvbo = 0;
-	glGenBuffers(1, &pvbo);
-	glBindBuffer(GL_ARRAY_BUFFER, pvbo);
-	glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(float), points, GL_STATIC_DRAW);
-	//color
-	GLuint cvbo = 0;
-	glGenBuffers(1, &cvbo);
-	glBindBuffer(GL_ARRAY_BUFFER, cvbo);
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(glm::vec3), colors, GL_STATIC_DRAW);
+	JREngine::g_renderer.CreateWindow("JREnginemont", 800, 600);
+	LOG("Window Initialized...");
 
-	GLuint tvbo = 0;
-	glGenBuffers(1, &tvbo);
-	glBindBuffer(GL_ARRAY_BUFFER, tvbo);
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(glm::vec2), texCoords, GL_STATIC_DRAW);
+	// load scene
+	auto scene = JREngine::g_resources.Get<JREngine::Scene>("Scenes/basic.scn");
 
-	/*GLuint vbo = 0;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);*/
+	// Create A Model
+	auto m = JREngine::g_resources.Get<JREngine::Model3D>("Models/spot.obj");
 
-	//vertex array
-	GLuint vao = 0;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, pvbo);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, cvbo);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-	glEnableVertexAttribArray(2);
-	glBindBuffer(GL_ARRAY_BUFFER, tvbo);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-
-	std::shared_ptr<JREngine::Program> program = JREngine::g_resources.Get<JREngine::Program>("Shaders/basic.prog", GL_PROGRAM);
-	program->Link();
-	program->Use();
-
-	//create material
-	std::shared_ptr<JREngine::Material> material = JREngine::g_resources.Get<JREngine::Material>("Materials/box.mtrl");
+	// Create Material
+	std::shared_ptr<JREngine::Material> material = JREngine::g_resources.Get<JREngine::Material>("Materials/fallguy.mtrl");
 	material->Bind();
 
-	glm::mat4 mx{ 1 };
-	mx = glm::scale(glm::vec3{ 0.5f, 0.5f, 0.5f });
 	material->GetProgram()->SetUniform("scale", 0.5f);
-	//material->GetProgram()->SetUniform("tint", glm::vec3{ 1, 0, 0 });
-	material->GetProgram()->SetUniform("transform", mx);
-	/*material->GetProgram()->SetUniform("scale", std::sin(JREngine::g_time.time * 3));
-	material->GetProgram()->SetUniform("transform", mx);*/
+	material->GetProgram()->SetUniform("tint", glm::vec3{ 1, 0, 0 });
+
+	glm::mat4 model{ 1 };
+	glm::mat4 projection = glm::perspective(45.0f, (float)JREngine::g_renderer.GetWidth() / (float)JREngine::g_renderer.GetHeight(), 1.0f, 100.0f);
+
+	glm::vec3 cameraPosition = glm::vec3{ 0, 0, 2 };
+	float speed = 3;
+
+	std::vector<JREngine::Transform> t;
+
+	for (size_t i = 0; i < 1000; i++)
+	{
+		t.push_back({ {JREngine::randomf(-10, 10), JREngine::randomf(-10, 10), JREngine::randomf(-10, 10)}, {JREngine::randomf(360), 90, 0} });
+	}
 
 
-
-
-	//glm::mat4 model{ 1 };
-	////bring view into loop, make camera position and change the first thing
-	//glm::mat4 view = glm::lookAt(glm::vec3{ 0, 0, 3 }, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0});
-	//glm::mat4 projection = glm::perspective(45.0f, JREngine::g_renderer.GetWidth() / (float)JREngine::g_renderer.GetHeight(), 0.01f, 100.0f);
+	JREngine::Transform transforms[] =
+	{
+		{ {0, 0, 0}, {0, 90, 90} },
+		{ {2, 0, 0}, {90, 90, 90} },
+		{ {0, 2, 0}, {0, 90, 0} },
+		{ {2, 2, 0}, {20, 90, 0} },
+		{ {1, 0, 1}, {0, 90, 0} },
+		{ {0, 1, 0}, {90, 90, 0} },
+	};
 
 	bool quit = false;
-	while (!quit) {
+	while (!quit)
+	{
 		JREngine::Engine::Instance().Update();
 
-		if (JREngine::g_inputSystem.GetKeyState(JREngine::key_escape) == JREngine::InputSystem::KeyState::Pressed) {
-			quit = true;
-		}
+		if (JREngine::g_inputSystem.GetKeyState(JREngine::key_escape) == JREngine::InputSystem::KeyState::Pressed) quit = true;
 
-		glUniform1f(material->GetProgram()->m_uniforms["scale"], std::sin(JREngine::g_time.time * 2.5f));
+		scene->Update();
 
-		/*model = glm::eulerAngleXYZ(0.0f, JREngine::g_time.time, 0.0f);
-		glm::mat4 mvp = projection * view * model;*/
-
-		mx = glm::eulerAngleXYZ(0.0f, 0.0f, JREngine::g_time.time);
-
-
-		//material->GetProgram()->SetUniform("mvp", mvp);
-		glUniformMatrix4fv(material->GetProgram()->m_uniforms["transform"], 1, GL_FALSE, glm::value_ptr(mx));
+		glm::mat4 view = glm::lookAt(cameraPosition, cameraPosition + glm::vec3{ 0 , 0, -1 }, glm::vec3{ 0, 1, 0 });
+		model = glm::eulerAngleXYZ(0.0f, JREngine::g_time.time, 0.0f);
+		glm::mat4 mvp = projection * view * model;
+		material->GetProgram()->SetUniform("mvp", mvp);
 
 		JREngine::g_renderer.BeginFrame();
 
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		scene->Draw(JREngine::g_renderer);
+		m->m_vertexBuffer.Draw();
 
 		JREngine::g_renderer.EndFrame();
 	}
-
+	scene->RemoveAll();
 	JREngine::Engine::Instance().Shutdown();
 	return 0;
 }

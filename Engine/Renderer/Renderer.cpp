@@ -15,14 +15,10 @@ namespace JREngine
 		SDL_Init(SDL_INIT_VIDEO);
 		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 		TTF_Init();
-
-		m_view = Matrix3x3::identity;
-		m_viewport = Matrix3x3::identity;
 	}
 
 	void Renderer::Shutdown()
 	{
-		//SDL_DestroyRenderer(m_renderer);
 		SDL_GL_DeleteContext(m_context);
 		SDL_DestroyWindow(m_window);
 		TTF_Quit();
@@ -36,8 +32,8 @@ namespace JREngine
 
 		int flags = (fullscreen) ? SDL_WINDOW_FULLSCREEN : (SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
-		m_window = SDL_CreateWindow(name, 100, 100, width, height, SDL_WINDOW_OPENGL | flags);
-		//m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
+		m_window = SDL_CreateWindow(name, 100, 100, width, height, SDL_WINDOW_OPENGL
+			| flags);
 
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
@@ -57,15 +53,12 @@ namespace JREngine
 
 	void Renderer::BeginFrame()
 	{
-		//SDL_SetRenderDrawColor(m_renderer, m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
-		//SDL_RenderClear(m_renderer);
-		glClearColor(0.0f, 0.0f, 0.0f, 1);
+		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void Renderer::EndFrame()
 	{
-		//SDL_RenderPresent(m_renderer);
 		SDL_GL_SwapWindow(m_window);
 	}
 
@@ -95,67 +88,55 @@ namespace JREngine
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle, const Vector2& scale, const Vector2& registration)
 	{
-		Vector2 size = texture->GetSize();
+		/*Vector2 size = texture->GetSize();
 		size = size * scale;
-
 		Vector2 origin = size * registration;
 		Vector2 tposition = position - origin;
-
 		SDL_Rect dest;
 		dest.x = (int)(tposition.x);
 		dest.y = (int)(tposition.y);
 		dest.w = (int)(size.x);
 		dest.h = (int)(size.y);
+		SDL_Point center{ (int)origin.x, (int)origin.y };*/
 
-		SDL_Point center{ (int)origin.x, (int)origin.y };
-				
 		//SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, angle, &center, SDL_FLIP_NONE);
 	}
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration)
 	{
-		Vector2 size = texture->GetSize();
+		/*Vector2 size = texture->GetSize();
 		size = size * transform.scale;
-
 		Vector2 origin = size * registration;
 		Vector2 tposition = transform.position - origin;
-
 		SDL_Rect dest;
 		dest.x = (int)(tposition.x);
 		dest.y = (int)(tposition.y);
 		dest.w = (int)(size.x);
 		dest.h = (int)(size.y);
-
-		SDL_Point center{ (int)origin.x, (int)origin.y };
+		SDL_Point center{ (int)origin.x, (int)origin.y };*/
 
 		//SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
 	}
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration, bool flipH)
 	{
-		Matrix3x3 mx = m_viewport * m_view * transform.matrix;
-
+		/*Matrix3x3 mx = m_viewport * m_view * transform.matrix;
 		Vector2 size = Vector2{ source.w, source.h };
 		size = size * mx.GetScale();
-
 		Vector2 origin = size * registration;
 		Vector2 tposition = mx.GetTranslation() - origin;
-
 		SDL_Rect dest;
 		dest.x = (int)(tposition.x);
 		dest.y = (int)(tposition.y);
 		dest.w = (int)(size.x);
 		dest.h = (int)(size.y);
-
 		SDL_Rect src;
 		src.x = source.x;
 		src.y = source.y;
 		src.w = source.w;
 		src.h = source.h;
-
 		SDL_Point center{ (int)origin.x, (int)origin.y };
-
-		SDL_RendererFlip flip = (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+		SDL_RendererFlip flip = (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;*/
 		//SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, math::RadToDeg(mx.GetRotation()), &center, flip);
 	}
 

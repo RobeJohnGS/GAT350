@@ -35,8 +35,8 @@ namespace JREngine
 		{
 			// not found, create resource and enter into resources
 			std::shared_ptr<T> resource = std::make_shared<T>();
-			resource->Create(name, args...);
-			m_resources[name] = resource;
+			//resource->Create(name, args...);
+			//m_resources[name] = resource;
 
 			return resource;
 		}

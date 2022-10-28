@@ -1,16 +1,20 @@
 #include "VertexBuffer.h"
 
 namespace JREngine {
-    VertexBuffer::VertexBuffer()
-    {
-        glGenVertexArrays(1, &m_vao);
-        glBindVertexArray(m_vao);
-    }
+	VertexBuffer::VertexBuffer()
+	{
+		glGenVertexArrays(1, &m_vao);
+		glBindVertexArray(m_vao);
+	}
 
-    bool VertexBuffer::Create(std::string name, ...)
-    {
-        return true;
-    }
+	VertexBuffer::~VertexBuffer()
+	{
+	}
+
+	bool VertexBuffer::Create(std::string name, ...)
+	{
+		return true;
+	}
 
 	void VertexBuffer::CreateVertexBuffer(GLsizei size, GLsizei vertexCount, void* data)
 	{
