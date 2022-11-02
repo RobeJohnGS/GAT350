@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <vector>
 #include <iostream>
+//John Roberts GAT-350
 
 int main(int argc, char** argv)
 {
@@ -34,6 +35,7 @@ int main(int argc, char** argv)
 
 		JREngine::g_renderer.BeginFrame();
 
+		//draw scene
 		scene->Draw(JREngine::g_renderer);
 		
 

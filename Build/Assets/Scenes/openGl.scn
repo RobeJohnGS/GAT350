@@ -2,34 +2,6 @@
   "actors": [
     {
       "type": "Actor",
-      "name": "Floor",
-      "transform": {
-        "position": [
-          0,
-          0,
-          0
-        ],
-        "scale": [
-          5,
-          3,
-          1
-        ],
-        "rotation": [
-          0,
-          0,
-          180
-        ]
-      },
-      "components": [
-        {
-          "type": "ModelComponent",
-          "model_name": "Models/plane.obj",
-          "material_name": "Materials/grass.mtrl"
-        }
-      ]
-    },
-    {
-      "type": "Actor",
       "name": "Spot",
       "transform": {
         "position": [
@@ -44,7 +16,7 @@
         ],
         "rotation": [
           0,
-          180,
+          160,
           0
         ]
       },
@@ -102,7 +74,7 @@
         },
         {
           "type": "CameraController",
-          "speed": 4
+          "speed": 3
         }
       ]
     }
