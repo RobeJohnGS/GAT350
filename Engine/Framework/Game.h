@@ -24,6 +24,5 @@ namespace JREngine
 	protected:
 		std::unique_ptr<Scene> m_scene;
 		int m_score = 0;
-
 	};
 }

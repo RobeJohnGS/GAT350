@@ -4,17 +4,21 @@
 
 namespace JREngine
 {
+	class Actor;
+
 	class PhysicsComponent : public Component
 	{
 	public:
 		PhysicsComponent() = default;
+
 		CLASS_DECLARATION(PhysicsComponent)
 
-		void Update() override;
-		virtual void ApplyForce(const Vector2& force) { acceleration += force; }
+			void Update() override;
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
+
+		virtual void ApplyForce(const Vector2& force) { acceleration += force; }
 
 	public:
 		Vector2 velocity;
@@ -22,5 +26,4 @@ namespace JREngine
 
 		float damping = 1;
 	};
-
 }

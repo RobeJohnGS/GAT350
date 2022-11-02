@@ -1,13 +1,34 @@
 #include "Scene.h"
 #include "Factory.h"
-#include <algorithm>
+#include "Engine.h"
 #include <iostream>
 
 namespace JREngine
 {
+	bool Scene::Create(const std::string name, ...)
+	{
+		rapidjson::Document document;
+		bool success = JREngine::json::Load(name, document);
+		if (!success)
+		{
+			LOG("error loading scene file %s.", name);
+			return false;
+		}
+		else
+		{
+			Read(document);
+			Initialize();
+			return true;
+		}
+
+	}
+
 	void Scene::Initialize()
 	{
-		for (auto& actor : m_actors) { actor->Initialize(); }
+		for (auto& actor : m_actors)
+		{
+			actor->Initialize();
+		}
 	}
 
 	void Scene::Update()
@@ -20,7 +41,7 @@ namespace JREngine
 			{
 				iter = m_actors.erase(iter);
 			}
-			else 
+			else
 			{
 				iter++;
 			}
@@ -29,27 +50,24 @@ namespace JREngine
 
 	void Scene::Draw(Renderer& renderer)
 	{
+		// get camera / set renderer view/projection 
+		auto camera = GetActorFromName("Camera");
+		if (camera)
+		{
+			g_renderer.SetView(camera->GetComponent<CameraComponent>()->GetView());
+			g_renderer.SetProjection(camera->GetComponent<CameraComponent>()->GetProjection());
+		}
+
+		// draw actors 
 		for (auto& actor : m_actors)
 		{
 			actor->Draw(renderer);
 		}
 	}
 
-	void Scene::Add(std::unique_ptr<Actor> actor)
-	{
-		actor->m_scene = this;
-		m_actors.push_back(std::move(actor));
-	}
-
-	void Scene::RemoveAll()
-	{
-		for (auto& actor : m_actors) { actor->SetDestroy(); }
-
-		m_actors.clear();
-	}
-
 	bool Scene::Write(const rapidjson::Value& value) const
 	{
+		//
 		return true;
 	}
 
@@ -82,13 +100,26 @@ namespace JREngine
 				}
 				else
 				{
-					Add(std::move(actor));
+					AddActor(std::move(actor));
 				}
 			}
+
 		}
-		
 
 		return true;
+	}
+
+	void Scene::AddActor(std::unique_ptr<Actor> actor)
+	{
+		actor->m_scene = this;
+		m_actors.push_back(std::move(actor));
+	}
+
+	void Scene::RemoveAll()
+	{
+		for (auto& actor : m_actors) { actor->SetDestroy(); }
+
+		m_actors.clear();
 	}
 
 }

@@ -23,15 +23,23 @@ namespace JREngine
 
 	void Actor::Initialize()
 	{
-		for (auto& component : m_components) { component->Initialize(); }
-		for (auto& child : m_children) { child->Initialize(); }
+		for (auto& component : m_components)
+		{
+			component->Initialize();
+		}
+		for (auto& child : m_children)
+		{
+			child->Initialize();
+		}
 	}
 
 	void Actor::Update()
 	{
-		if (!active) return;
+		if (!active)
+		{
+			return;
+		}
 
-		// update lifespan if lifespan is not 0
 		if (lifespan != 0)
 		{
 			lifespan -= g_time.deltaTime;
@@ -41,8 +49,14 @@ namespace JREngine
 			}
 		}
 
-		for (auto& component : m_components) { component->Update();	}
-		for (auto& child : m_children) { child->Update(); }
+		for (auto& component : m_components)
+		{
+			component->Update();
+		}
+		for (auto& child : m_children)
+		{
+			child->Update();
+		}
 
 		if (m_parent) m_transform.Update(m_parent->m_transform.matrix);
 		else m_transform.Update();
@@ -50,7 +64,10 @@ namespace JREngine
 
 	void Actor::Draw(Renderer& renderer)
 	{
-		if (!active) return;
+		if (!active)
+		{
+			return;
+		}
 
 		for (auto& component : m_components)
 		{
@@ -60,8 +77,50 @@ namespace JREngine
 				renderComponent->Draw(renderer);
 			}
 		}
+		for (auto& child : m_children)
+		{
+			child->Draw(renderer);
+		}
+	}
 
-		for (auto& child : m_children) { child->Draw(renderer);	}
+	bool Actor::Write(const rapidjson::Value& value) const
+	{
+		//
+		return true;
+	}
+
+	bool Actor::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value, tag);
+		READ_DATA(value, name);
+		READ_DATA(value, active);
+		READ_DATA(value, lifespan);
+
+		if (value.HasMember("transform"))
+		{
+			m_transform.Read(value["transform"]);
+		}
+
+		if (value.HasMember("components") && value["components"].IsArray())
+		{
+			for (auto& componentValue : value["components"].GetArray())
+			{
+
+				std::string type;
+				READ_DATA(componentValue, type);
+
+
+				auto component = Factory::Instance().Create<Component>(type);
+				if (component)
+				{
+					component->Read(componentValue);
+					AddComponent(std::move(component));
+				}
+
+			}
+		}
+
+		return true;
 	}
 
 	void Actor::AddChild(std::unique_ptr<Actor> child)
@@ -75,39 +134,6 @@ namespace JREngine
 	{
 		component->m_owner = this;
 		m_components.push_back(std::move(component));
-	}
-
-	bool Actor::Write(const rapidjson::Value& value) const
-	{
-		return true;
-	}
-
-	bool Actor::Read(const rapidjson::Value& value)
-	{
-		READ_DATA(value, tag);
-		READ_DATA(value, name);
-		READ_DATA(value, active);
-		READ_DATA(value, lifespan);
-
-		if (value.HasMember("transform")) m_transform.Read(value["transform"]);
-
-		if (value.HasMember("components") && value["components"].IsArray())
-		{
-			for (auto& componentValue : value["components"].GetArray())
-			{
-				std::string type;
-				READ_DATA(componentValue, type);
-
-				auto component = Factory::Instance().Create<Component>(type);
-				if (component)
-				{
-					component->Read(componentValue);
-					AddComponent(std::move(component));
-				}
-			}
-		}
-
-		return true;
 	}
 
 }

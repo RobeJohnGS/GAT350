@@ -5,26 +5,27 @@ namespace JREngine
 {
 	struct Matrix2x2
 	{
-		Vector2 rows[2]; // [2][2]
+		Vector2 rows[2]; // [2] [2]
 
 		Matrix2x2() = default;
 		Matrix2x2(const Vector2& row1, const Vector2& row2);
 
-		Vector2  operator [] (size_t index) const { return rows[index]; }
+		Vector2 operator [] (size_t index) const { return rows[index]; }
 		Vector2& operator [] (size_t index) { return rows[index]; }
 
 		Vector2 operator * (const Vector2& v); // v2 = mx22 * v2
 		Matrix2x2 operator * (const Matrix2x2& mx); // mx22 = mx22 * mx22
 
-
 		static Matrix2x2 CreateScale(const Vector2& scale);
 		static Matrix2x2 CreateScale(float scale);
 		static Matrix2x2 CreateRotation(float radians);
 
+
 		static const Matrix2x2 identity;
 		static const Matrix2x2 zero;
+
 	};
-	
+
 	inline Matrix2x2::Matrix2x2(const Vector2& row1, const Vector2& row2)
 	{
 		rows[0] = row1;
@@ -57,10 +58,6 @@ namespace JREngine
 	{
 		Matrix2x2 mx;
 
-		// non-uniform scale
-		// sX 0
-		// 0  sY
-
 		mx[0] = Vector2{ scale.x, 0.0f };
 		mx[1] = Vector2{ 0.0f, scale.y };
 
@@ -70,10 +67,6 @@ namespace JREngine
 	inline Matrix2x2 Matrix2x2::CreateScale(float scale)
 	{
 		Matrix2x2 mx;
-
-		// uniform scale
-		// s 0
-		// 0 s
 
 		mx[0] = Vector2{ scale, 0.0f };
 		mx[1] = Vector2{ 0.0f, scale };
@@ -89,8 +82,11 @@ namespace JREngine
 		float s = std::sin(radians);
 
 		mx[0] = Vector2{ c, -s };
-		mx[1] = Vector2{ s,  c };
+		mx[1] = Vector2{ s, c };
 
 		return mx;
 	}
+
+
+
 }

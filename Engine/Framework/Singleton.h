@@ -1,5 +1,6 @@
 #pragma once
 
+
 namespace JREngine
 {
 	template<class T>
@@ -16,7 +17,6 @@ namespace JREngine
 			static T instance;
 			return instance;
 		}
-
 	protected:
 		// prevent public constructor
 		Singleton() = default;

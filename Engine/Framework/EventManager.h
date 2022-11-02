@@ -10,7 +10,7 @@ namespace JREngine
 	public:
 		struct Observer
 		{
-			GameObject* receiver = nullptr;
+			GameObject* reciever = nullptr;
 			Event::functionPtr function;
 		};
 
@@ -19,8 +19,8 @@ namespace JREngine
 		void Shutdown();
 		void Update();
 
-		void Subscribe(const std::string& name, Event::functionPtr function, GameObject* receiver = nullptr);
-		void Unsubscribe(const std::string& name, GameObject* receiver);
+		void Subscribe(const std::string& name, Event::functionPtr function, GameObject* reciever = nullptr);
+		void Unsubscribe(const std::string& name, GameObject* reciever);
 
 		void Notify(const Event& event);
 

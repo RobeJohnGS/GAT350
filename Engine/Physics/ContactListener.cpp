@@ -1,14 +1,15 @@
 #include "ContactListener.h"
 #include "Framework/Actor.h"
 #include "Components/CollisionComponent.h"
-#include <iostream>
 
 namespace JREngine
 {
+
 	void ContactListener::BeginContact(b2Contact* contact)
 	{
 		b2Fixture* fixtureA = contact->GetFixtureA();
 		b2Fixture* fixtureB = contact->GetFixtureB();
+
 
 		if (fixtureA->GetUserData().pointer && fixtureB->GetUserData().pointer)
 		{
@@ -50,5 +51,4 @@ namespace JREngine
 			}
 		}
 	}
-
 }

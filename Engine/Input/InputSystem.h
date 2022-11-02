@@ -1,17 +1,15 @@
 #pragma once
 #include "../Math/Vector2.h"
 #include <cstdint>
-#include <vector>
-#include <map>
 #include <array>
-#include <string>
+#include <vector>
 
 namespace JREngine
 {
 	class InputSystem
 	{
 	public:
-		enum class KeyState
+		enum State
 		{
 			Idle,
 			Pressed,
@@ -28,32 +26,26 @@ namespace JREngine
 
 		void Update();
 
-		KeyState GetKeyState(uint32_t key);
-		KeyState GetKeyState(const std::string& key);
-
-		bool GetKeyDown(uint32_t key) { return m_keyboardState[key]; }
-		bool GetKeyDown(const std::string& key);
-
+		State GetKeyState(uint32_t key);
+		bool GetKeyDown(int key) { return m_keyboardState[key]; }
 		bool GetPreviousKeyDown(uint32_t key) { return m_prevKeyboardState[key]; }
-		bool GetPreviousKeyDown(const std::string& key);
 
 		const Vector2& GetMousePosition() const { return m_mousePosition; }
-		
-		KeyState GetButtonState(uint32_t button);
+
+		State GetButtonState(uint32_t button);
 		bool GetButtonDown(uint32_t button) { return m_mouseButtonState[button]; }
 		bool GetPreviousButtonDown(uint32_t button) { return m_prevMouseButtonState[button]; }
 
 	private:
-		// keyboard
+		int m_numKeys;
+
 		std::vector<uint8_t> m_keyboardState;
 		std::vector<uint8_t> m_prevKeyboardState;
 
-		// mouse
 		Vector2 m_mousePosition;
-		
+
 		std::array<uint8_t, 3> m_mouseButtonState;
 		std::array<uint8_t, 3> m_prevMouseButtonState;
-
 	};
 
 	extern const uint32_t button_left;
@@ -67,5 +59,13 @@ namespace JREngine
 	extern const uint32_t key_down;
 	extern const uint32_t key_left;
 	extern const uint32_t key_right;
-	extern const uint32_t key_down_y;
+
+	extern const uint32_t key_w;
+	extern const uint32_t key_a;
+	extern const uint32_t key_s;
+	extern const uint32_t key_d;
+	extern const uint32_t key_q;
+	extern const uint32_t key_e;
+	extern const uint32_t key_LShift;
+	extern const uint32_t key_LCtrl;
 }

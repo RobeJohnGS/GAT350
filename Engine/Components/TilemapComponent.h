@@ -11,7 +11,7 @@ namespace JREngine
 	public:
 		CLASS_DECLARATION(TilemapComponent)
 
-		virtual void Initialize() override;
+			virtual void Initialize() override;
 		virtual void Update() override;
 
 		virtual bool Write(const rapidjson::Value& value) const override;

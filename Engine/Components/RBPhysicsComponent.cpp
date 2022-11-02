@@ -7,7 +7,6 @@ namespace JREngine
 	{
 		if (m_body)
 		{
-			m_body->SetEnabled(false);
 			g_physicsSystem.DestroyBody(m_body);
 		}
 	}

@@ -144,11 +144,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Build\Assets\Materials\box.mtrl" />
-    <None Include="..\Build\Assets\Scenes\basic-lit.scn" />
+    <None Include="..\Build\Assets\Materials\grass.mtrl" />
+    <None Include="..\Build\Assets\Materials\multi.mtrl" />
+    <None Include="..\Build\Assets\Materials\ogre.mtrl" />
+    <None Include="..\Build\Assets\Materials\spot.mtrl" />
     <None Include="..\Build\Assets\Scenes\basic.scn" />
+    <None Include="..\Build\Assets\Scenes\basic_lit.scn" />
+    <None Include="..\Build\Assets\Scenes\openGl.scn" />
+    <None Include="..\Build\Assets\Scenes\texture.scn" />
     <None Include="..\Build\Assets\Shaders\basic.frag" />
     <None Include="..\Build\Assets\Shaders\basic.prog" />
     <None Include="..\Build\Assets\Shaders\basic.vert" />
+    <None Include="..\Build\Assets\Shaders\basic_lit.frag" />
+    <None Include="..\Build\Assets\Shaders\basic_lit.prog" />
+    <None Include="..\Build\Assets\Shaders\basic_lit.vert" />
+    <None Include="..\Build\Assets\Shaders\basic_phong.frag" />
+    <None Include="..\Build\Assets\Shaders\basic_phong.prog" />
+    <None Include="..\Build\Assets\Shaders\basic_phong.vert" />
+    <None Include="..\Build\Assets\Shaders\texture_phong.frag" />
+    <None Include="..\Build\Assets\Shaders\texture_phong.prog" />
+    <None Include="..\Build\Assets\Shaders\texture_phong.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

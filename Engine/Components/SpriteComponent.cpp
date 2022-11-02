@@ -7,15 +7,12 @@ namespace JREngine
 {
 	void SpriteComponent::Update()
 	{
-	}
-
-	void SpriteComponent::Draw(Renderer& renderer)
-	{
-		renderer.Draw(m_texture, GetSource(), m_owner->m_transform, registration, flipHorizontal);
+		//
 	}
 
 	bool SpriteComponent::Write(const rapidjson::Value& value) const
 	{
+		//
 		return true;
 	}
 
@@ -35,6 +32,11 @@ namespace JREngine
 		}
 
 		return true;
+	}
+
+	void SpriteComponent::Draw(Renderer& renderer)
+	{
+		renderer.Draw(m_texture, GetSource(), m_owner->m_transform, registration, flipHorizontal);
 	}
 
 }

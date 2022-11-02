@@ -1,5 +1,6 @@
 #include "PlayerComponent.h"
 #include "Engine.h"
+#include "Framework/Game.h"
 #include <iostream>
 
 namespace JREngine
@@ -13,11 +14,11 @@ namespace JREngine
 	{
 		// move left/right
 		Vector2 direction = Vector2::zero;
-		if (g_inputSystem.GetKeyState(key_left) == InputSystem::KeyState::Held)
+		if (JREngine::g_inputSystem.GetKeyState(JREngine::key_left) == InputSystem::State::Held)
 		{
 			direction = Vector2::left;
 		}
-		if (g_inputSystem.GetKeyState(key_right) == InputSystem::KeyState::Held)
+		if (JREngine::g_inputSystem.GetKeyState(JREngine::key_right) == InputSystem::State::Held)
 		{
 			direction = Vector2::right;
 		}
@@ -27,20 +28,10 @@ namespace JREngine
 		if (component)
 		{
 			// if in the air (m_groundCount == 0) then reduce force
-			float multiplier = (m_groundCount > 0) ? 1 : 0.1f;
+			float multiplier = (m_groundCount > 0) ? 1 : 0.2f;
 
-			component->ApplyForce(direction * speed * multiplier);
+			component->ApplyForce(direction * speed);
 			velocity = component->velocity;
-		}
-
-		// jump
-		if (m_groundCount > 0 && g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
-		{
-			auto component = m_owner->GetComponent<PhysicsComponent>();
-			if (component)
-			{
-				component->ApplyForce(Vector2::up * jump);
-			}
 		}
 
 		auto animComponent = m_owner->GetComponent<SpriteAnimComponent>();
@@ -55,9 +46,28 @@ namespace JREngine
 			{
 				animComponent->SetSequence("idle");
 			}
+
+			/*
+			if (std::fabs(velocity.y) > 0)
+			{
+				animComponent->SetSequence("jump");
+			}
+			else
+			{
+				animComponent->SetSequence("idle");
+			*/
 		}
 
-		// set camera
+		// jump
+		if (m_groundCount > 0 && g_inputSystem.GetKeyState(key_space) == InputSystem::State::Pressed)
+		{
+			auto component = m_owner->GetComponent<PhysicsComponent>();
+			if (component)
+			{
+				component->ApplyForce(Vector2::up * jump);
+			}
+		}
+
 		auto camera = m_owner->GetScene()->GetActorFromName("Camera");
 		if (camera)
 		{
@@ -67,6 +77,7 @@ namespace JREngine
 
 	bool PlayerComponent::Write(const rapidjson::Value& value) const
 	{
+		//
 		return true;
 	}
 
@@ -83,10 +94,9 @@ namespace JREngine
 		if (event.name == "EVENT_DAMAGE")
 		{
 			health -= std::get<float>(event.data);
-			if (health <= 0 && !m_owner->IsDestroyed())
+			std::cout << health << std::endl;
+			if (health <= 0)
 			{
-				//std::cout << "destroyed: " << m_owner->GetName() << std::endl;
-
 				m_owner->SetDestroy();
 
 				Event event;
@@ -95,15 +105,11 @@ namespace JREngine
 				g_eventManager.Notify(event);
 			}
 		}
+
 	}
 
 	void PlayerComponent::OnCollisionEnter(Actor* other)
 	{
-		if (other->GetTag() == "Ground")
-		{
-			m_groundCount++;
-		}
-
 		if (other->GetName() == "Coin")
 		{
 			Event event;
@@ -120,15 +126,34 @@ namespace JREngine
 			Event event;
 			event.name = "EVENT_DAMAGE";
 			event.data = damage;
-			event.receiver = other;
+			event.reciever = other;
 
 			g_eventManager.Notify(event);
+		}
+
+		if (other->GetTag() == "Ground")
+		{
+			m_groundCount++;
+		}
+
+		if (other->GetTag() == "Bounce")
+		{
+			auto component = m_owner->GetComponent<PhysicsComponent>();
+			if (component)
+			{
+				component->ApplyForce(Vector2::up * 80);
+			}
+			m_groundCount++;
 		}
 	}
 
 	void PlayerComponent::OnCollisionExit(Actor* other)
 	{
 		if (other->GetTag() == "Ground")
+		{
+			m_groundCount--;
+		}
+		if (other->GetTag() == "Bounce")
 		{
 			m_groundCount--;
 		}

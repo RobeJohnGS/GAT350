@@ -5,6 +5,7 @@ namespace JREngine
 {
 	void TextComponent::Update()
 	{
+		//
 	}
 
 	void TextComponent::Draw(Renderer& renderer)
@@ -14,12 +15,13 @@ namespace JREngine
 
 	void TextComponent::SetText(const std::string& text)
 	{
-		SDL_Surface* surface = m_font->CreateSurface(text, color);
-		m_texture->CreateFromSurface(surface, g_renderer);
+		// create a texture from a surface generated in the font class
+		m_texture->CreateFromSurface(m_font->CreateSurface(text, color), g_renderer);
 	}
 
 	bool TextComponent::Write(const rapidjson::Value& value) const
 	{
+		//
 		return true;
 	}
 
@@ -32,6 +34,7 @@ namespace JREngine
 		READ_DATA(value, color);
 
 		m_font = g_resources.Get<Font>(font_name, font_size);
+
 		m_texture = std::make_unique<Texture>();
 
 		SetText(text);

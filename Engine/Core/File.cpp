@@ -23,7 +23,6 @@ namespace JREngine
 	bool GetFileSize(const std::string& pathname, size_t& size)
 	{
 		if (!FileExists(pathname)) return false;
-
 		size = std::filesystem::file_size(pathname);
 
 		return true;
@@ -33,7 +32,7 @@ namespace JREngine
 	{
 		if (!FileExists(pathname))
 		{
-			LOG("Error could not read file %s", pathname.c_str());
+			LOG("Error could not read file &s", pathname.c_str());
 			return false;
 		}
 
@@ -42,11 +41,11 @@ namespace JREngine
 		GetFileSize(pathname, size);
 		buffer.resize(size);
 
-		// read file into buffer
 		std::ifstream fstream(pathname);
 		fstream.read(buffer.data(), size);
 		fstream.close();
 
 		return true;
 	}
+
 }

@@ -14,7 +14,7 @@ namespace JREngine
 	public:
 		CLASS_DECLARATION(TextComponent)
 
-		virtual void Update() override;
+			virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
 
 		void SetText(const std::string& text);
@@ -33,4 +33,3 @@ namespace JREngine
 		std::shared_ptr<Texture> m_texture;
 	};
 }
-

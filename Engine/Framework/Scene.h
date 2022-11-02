@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor.h"
+#include "Resource\Resource.h"
 #include <list>
 #include <memory>
 
@@ -10,7 +11,7 @@ namespace JREngine
 	class Renderer;
 	class Game;
 
-	class Scene : public GameObject, public ISerializable
+	class Scene : public GameObject, public ISerializable, public Resource
 	{
 	public:
 		Scene() = default;
@@ -18,16 +19,18 @@ namespace JREngine
 		Scene(const Scene& other) {}
 		~Scene() = default;
 
+		virtual bool Create(const std::string name, ...) override;
+
 		CLASS_DECLARATION(Scene)
 
-		void Initialize() override;
+			void Initialize() override;
 		void Update() override;
 		void Draw(Renderer& renderer);
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
-		void Add(std::unique_ptr<Actor> actor);
+		void AddActor(std::unique_ptr<Actor> actor);
 		void RemoveAll();
 
 		template<typename T>
@@ -37,15 +40,14 @@ namespace JREngine
 		T* GetActorFromName(const std::string& name);
 
 		template<typename T = Actor>
-		std::vector<T*> GetActorsFromTag(const std::string& tag);
+		std::vector<T*> GetActorFromTag(const std::string& tag);
 
 		Game* GetGame() { return m_game; }
 
 	private:
-		Game* m_game =nullptr;
+		Game* m_game;
 		std::list<std::unique_ptr<Actor>> m_actors;
 	};
-
 
 	template<typename T>
 	inline T* Scene::GetActor()
@@ -55,7 +57,6 @@ namespace JREngine
 			T* result = dynamic_cast<T*>(actor.get());
 			if (result) return result;
 		}
-
 		return nullptr;
 	}
 
@@ -64,7 +65,7 @@ namespace JREngine
 	{
 		for (auto& actor : m_actors)
 		{
-			if (actor->GetName() == name)
+			if (name == actor->GetName())
 			{
 				return dynamic_cast<T*>(actor.get());
 			}
@@ -74,19 +75,22 @@ namespace JREngine
 	}
 
 	template<typename T>
-	inline std::vector<T*> Scene::GetActorsFromTag(const std::string& tag)
+	inline std::vector<T*> Scene::GetActorFromTag(const std::string& tag)
 	{
 		std::vector<T*> result;
 
 		for (auto& actor : m_actors)
 		{
-			if (actor->GetTag() == tag)
+			if (tag == actor->GetTag())
 			{
-				T* tagActor = dynamic_cast<T*>(actor.get());
-				if (tagActor) result.push_back(tagActor);
+				T* TagActor = dynamic_cast<T*>(actor.get());
+				if (TagActor)
+				{
+					result.push_back(TagActor);
+				}
 			}
 		}
 
-		return result;
+		return std::vector<T*>();
 	}
 }

@@ -4,6 +4,7 @@
 namespace JREngine
 {
 	void SetFilePath(const std::string& pathname);
+
 	std::string GetFilePath();
 
 	bool FileExists(const std::string& pathname);

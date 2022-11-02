@@ -1,6 +1,6 @@
 #include "CollisionComponent.h"
 #include "Engine.h"
-#include <iostream>
+#include <iostream> 
 
 namespace JREngine
 {
@@ -9,6 +9,7 @@ namespace JREngine
         auto component = m_owner->GetComponent<RBPhysicsComponent>();
         if (component)
         {
+            // if data was not set, get size from render component source rect
             if (data.size.x == 0 && data.size.y == 0)
             {
                 auto renderComponent = m_owner->GetComponent<RenderComponent>();
@@ -28,6 +29,7 @@ namespace JREngine
             {
                 g_physicsSystem.SetCollisionBox(component->m_body, data, m_owner);
             }
+
         }
     }
 
@@ -37,12 +39,18 @@ namespace JREngine
 
     void CollisionComponent::OnCollisionEnter(Actor* other)
     {
-        if (m_enterFunction) m_enterFunction(other);
+        if (m_enterFunction)
+        {
+            m_enterFunction(other);
+        }
     }
 
     void CollisionComponent::OnCollisionExit(Actor* other)
     {
-        if (m_enterFunction) m_exitFunction(other);
+        if (m_exitFunction)
+        {
+            m_exitFunction(other);
+        }
     }
 
     bool CollisionComponent::Write(const rapidjson::Value& value) const
@@ -60,7 +68,7 @@ namespace JREngine
 
         READ_DATA(value, scale_offset);
 
+
         return true;
     }
 }
-

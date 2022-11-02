@@ -1,5 +1,6 @@
 #pragma once
 #include "RenderComponent.h"
+#include "Math/Rect.h"
 #include <map>
 
 namespace JREngine
@@ -29,15 +30,17 @@ namespace JREngine
 		CLASS_DECLARATION(SpriteAnimComponent)
 
 			virtual void Update() override;
-		virtual void Draw(Renderer& renderer) override;
-
-		virtual void SetSequence(const std::string& name);
-		Rect& GetSource() override;
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
+		virtual void SetSequence(const std::string& name);
+		Rect& GetSource() override;
+
+		virtual void Draw(Renderer& renderer) override;
+
 	public:
+		// internals
 		int frame = 0;
 		float frameTimer = 0;
 

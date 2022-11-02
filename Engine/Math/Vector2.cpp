@@ -9,16 +9,19 @@ namespace JREngine
 	const Vector2 Vector2::left{ -1, 0 };
 	const Vector2 Vector2::right{ 1, 0 };
 
+
+
 	std::istream& operator >> (std::istream& stream, Vector2& v)
 	{
 		std::string line;
 		std::getline(stream, line);
 
+
 		// { ##, ## }
-		std::string xs = line.substr(line.find("{") + 1, line.find(",") - (line.find("{") + 1));
+		std::string xs = line.substr(line.find("{") + 1, line.find(",") - line.find("{") - 1);
 		v.x = std::stof(xs);
 
-		std::string ys = line.substr(line.find(",") + 1, line.find("}") - (line.find(",") + 1));
+		std::string ys = line.substr(line.find(",") + 1, line.find("}") - line.find(",") - 1);
 		v.y = std::stof(ys);
 
 		return stream;
@@ -30,5 +33,4 @@ namespace JREngine
 
 		return stream;
 	}
-
 }

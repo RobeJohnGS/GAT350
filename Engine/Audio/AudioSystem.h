@@ -1,7 +1,8 @@
 #pragma once
 #include "AudioChannel.h"
-#include <map>
 #include <string>
+#include <map>
+
 
 namespace FMOD
 {
@@ -28,6 +29,5 @@ namespace JREngine
 	private:
 		FMOD::System* m_fmodSystem;
 		std::map<std::string, FMOD::Sound*> m_sounds;
-
 	};
 }

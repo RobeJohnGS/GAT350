@@ -11,9 +11,9 @@ namespace JREngine
 		using clock_rep = clock::rep;
 
 	public:
-		Time() : 
-			m_startTimePoint{ clock::now()},
-			m_frameTimePoint{ clock::now()} 
+		Time() :
+			m_startTimePoint{ clock::now() },
+			m_frameTimePoint{ clock::now() }
 		{}
 
 		void Tick();

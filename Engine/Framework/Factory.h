@@ -20,7 +20,7 @@ namespace JREngine
 	class Creator : public CreatorBase
 	{
 	public:
-		std::unique_ptr<GameObject> Create() override
+		virtual std::unique_ptr<GameObject> Create() override
 		{
 			return std::make_unique<T>();
 		}
@@ -34,7 +34,7 @@ namespace JREngine
 
 		PrefabCreator(std::unique_ptr<T> instance) : m_instance{ std::move(instance) } {}
 
-		std::unique_ptr<GameObject> Create() override
+		virtual std::unique_ptr<GameObject> Create() override
 		{
 			return m_instance->Clone();
 		}
@@ -61,7 +61,7 @@ namespace JREngine
 		std::map<std::string, std::unique_ptr<CreatorBase>> m_registry;
 	};
 
-	template<typename T>
+	template <typename T>
 	inline void Factory::Register(const std::string& key)
 	{
 		m_registry[key] = std::make_unique<Creator<T>>();
@@ -73,7 +73,7 @@ namespace JREngine
 		m_registry[key] = std::make_unique<PrefabCreator<T>>(std::move(instance));
 	}
 
-	template<typename T>
+	template <typename T>
 	inline std::unique_ptr<T> Factory::Create(const std::string& key)
 	{
 		auto iter = m_registry.find(key);
@@ -86,5 +86,4 @@ namespace JREngine
 
 		return std::unique_ptr<T>();
 	}
-
 }

@@ -9,18 +9,15 @@
 
 namespace JREngine
 {
-	class ContactListener;
-
 	class PhysicsSystem
 	{
 	public:
 		struct RigidBodyData
 		{
-			float gravity_scale = 1;
+			float gravity_scale = 1.0f;
 			bool constrain_angle = false;
 			bool is_dynamic = true;
 		};
-
 		struct CollisionData
 		{
 			Vector2 size;

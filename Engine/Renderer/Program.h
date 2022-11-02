@@ -1,24 +1,26 @@
 #pragma once
-
 #include "Resource/Resource.h"
 #include "Renderer.h"
-#include "Math/MathUtils.h"
-#include <map>
-#include <vector>
+#include "Math/MathUtils.h" 
+#include <map> 
+#include <vector> 
 
-namespace JREngine {
+namespace JREngine
+{
 	class Shader;
 
-	class Program : public Resource {
+	class Program : public Resource
+	{
 	public:
 		~Program();
-		// Inherited via Resource
+
 		virtual bool Create(std::string name, ...) override;
 		void AddShader(const std::shared_ptr<Shader>& shader);
 
 		void Link();
 		void Use();
 
+		// uniforms 
 		void SetUniform(const std::string& name, float value);
 		void SetUniform(const std::string& name, const glm::vec3& value);
 		void SetUniform(const std::string& name, const glm::mat4& value);
@@ -32,14 +34,12 @@ namespace JREngine {
 
 		void SetUniform(const std::string& name, const glm::mat3& value);
 
-		//variables
-
-		GLuint m_program = 0;
-		std::vector<std::shared_ptr<Shader>> m_shaders;
-		std::map<std::string, GLint> m_uniforms;
-
 	private:
 		GLint GetUniform(const std::string& name);
 
+	public:
+		GLuint m_program = 0;
+		std::vector<std::shared_ptr<Shader>> m_shaders;
+		std::map<std::string, GLint> m_uniforms;
 	};
 }

@@ -1,10 +1,11 @@
 #pragma once
+#include "Math/Transform.h"
 #include "Serialization/Serializable.h"
 
 #define CLASS_DECLARATION(class) \
 	std::unique_ptr<GameObject> Clone() override { return std::make_unique<class>(*this); }
 
-#define REGISTER_CLASS(class)	JREngine::Factory::Instance().Register<class>(#class);
+#define REGISTER_CLASS(class) JREngine::Factory::Instance().Register<class>(#class);
 
 namespace JREngine
 {

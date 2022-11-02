@@ -4,6 +4,8 @@
 
 namespace JREngine
 {
+	class Actor;
+
 	class AudioComponent : public Component
 	{
 	public:
@@ -12,7 +14,7 @@ namespace JREngine
 
 		CLASS_DECLARATION(AudioComponent)
 
-		void Initialize() override;
+			void Initialize() override;
 		void Update() override;
 
 		virtual bool Write(const rapidjson::Value& value) const override;
@@ -25,9 +27,9 @@ namespace JREngine
 		AudioChannel m_channel;
 
 		std::string sound_name;
+		bool play_on_start = false;
 		float volume = 1;
 		float pitch = 1;
-		bool play_on_start = false;
 		bool loop = false;
 	};
 }

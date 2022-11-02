@@ -12,35 +12,37 @@ namespace JREngine
 		Vector3(float v) : x{ v }, y{ v }, z{ v } {}
 		Vector3(int x, int y, int z) : x{ (float)x }, y{ (float)y }, z{ (float)z } {}
 
-		void Set(float x, float y, float z) { this->x = x; this->y = y; this->z = z; }
-		float  operator [] (size_t index) const { return (&x)[index]; }
+		void Set(float x, float y) { this->x = x; this->y = y; }
+
+		float operator [] (size_t index) const { return (&x)[index]; }
 		float& operator [] (size_t index) { return (&x)[index]; }
 
-
 		// arithmetic operators
-		Vector3 operator + (const Vector3& v) const { return Vector3{ this->x + v.x, this->y + v.y, this->z + v.z }; }
-		Vector3 operator - (const Vector3& v) const { return Vector3{ this->x - v.x, this->y - v.y, this->z - v.z }; }
-		Vector3 operator * (const Vector3& v) const { return Vector3{ this->x * v.x, this->y * v.y, this->z * v.z }; }
-		Vector3 operator / (const Vector3& v) const { return Vector3{ this->x / v.x, this->y / v.y, this->z / v.z }; }
+		// Vector3 = Vector3 + Vector3
+		Vector3 operator + (const Vector3& v) const { return Vector3{ x + v.x, y + v.y, z + v.z }; }
+		Vector3 operator - (const Vector3& v) const { return Vector3{ x - v.x, y - v.y, z - v.z }; }
+		Vector3 operator * (const Vector3& v) const { return Vector3{ x * v.x, y * v.y, z * v.z }; }
+		Vector3 operator / (const Vector3& v) const { return Vector3{ x / v.x, y / v.y, z / v.z }; }
 
-		Vector3 operator + (float s) const { return Vector3{ this->x + s, this->y + s, this->z + s }; }
-		Vector3 operator - (float s) const { return Vector3{ this->x - s, this->y - s, this->z - s }; }
-		Vector3 operator * (float s) const { return Vector3{ this->x * s, this->y * s, this->z * s }; }
-		Vector3 operator / (float s) const { return Vector3{ this->x / s, this->y / s, this->z / s }; }
+		// Vector3 = Vector3 + float
+		Vector3 operator + (float s) const { return Vector3{ x + s, y + s, z + s }; }
+		Vector3 operator - (float s) const { return Vector3{ x - s, y - s, z - s }; }
+		Vector3 operator * (float s) const { return Vector3{ x * s, y * s, z * s }; }
+		Vector3 operator / (float s) const { return Vector3{ x / s, y / s, z / s }; }
 
 		// assignment operators
-		Vector3& operator += (const Vector3& v) { this->x += v.x; this->y += v.y; this->z += v.z; return *this; }
-		Vector3& operator -= (const Vector3& v) { this->x -= v.x; this->y -= v.y; this->z -= v.z; return *this; }
-		Vector3& operator *= (const Vector3& v) { this->x *= v.x; this->y *= v.y; this->z *= v.z; return *this; }
-		Vector3& operator /= (const Vector3& v) { this->x /= v.x; this->y /= v.y; this->z /= v.z; return *this; }
+		Vector3& operator += (const Vector3& v) { x += v.x, y += v.y, z += v.z; return *this; }
+		Vector3& operator -= (const Vector3& v) { x -= v.x, y -= v.y, z -= v.z; return *this; }
+		Vector3& operator *= (const Vector3& v) { x *= v.x, y *= v.y, z *= v.z; return *this; }
+		Vector3& operator /= (const Vector3& v) { x /= v.x, y /= v.y, z /= v.z; return *this; }
 
-		Vector3& operator += (float s) { this->x += s; this->y += s; this->z += s; return *this; }
-		Vector3& operator -= (float s) { this->x -= s; this->y -= s; this->z -= s; return *this; }
-		Vector3& operator *= (float s) { this->x *= s; this->y *= s; this->z *= s; return *this; }
-		Vector3& operator /= (float s) { this->x /= s; this->y /= s; this->z /= s; return *this; }
+		Vector3& operator += (float s) { x += s, y += s, z += s; return *this; }
+		Vector3& operator -= (float s) { x -= s, y -= s, z -= s; return *this; }
+		Vector3& operator *= (float s) { x *= s, y *= s, z *= s; return *this; }
+		Vector3& operator /= (float s) { x /= s, y /= s, z /= s; return *this; }
 
 		// unary
-		// Vector3 = -Vector3
+		// Vector3 = -Vector@
 		Vector3 operator - () const { return Vector3{ -x, -y, -z }; }
 
 		// comparison

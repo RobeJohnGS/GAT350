@@ -10,7 +10,7 @@ namespace JREngine
 	public:
 		Component() = default;
 
-		virtual void Initialize() override {}
+		virtual void Initialize() override { }
 		virtual void Update() = 0;
 
 		friend class Actor;

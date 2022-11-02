@@ -23,7 +23,6 @@ namespace math
 	{
 		return degrees * (Pi / 180);
 	}
-
 	constexpr float RadToDeg(float radians)
 	{
 		return radians * (180 / Pi);
@@ -75,8 +74,7 @@ namespace math
 	{
 		if (value < min) return max - mod((min - value), (max - min));
 		if (value > max) return min + mod((value - min), (max - min));
-		
+
 		return value;
 	}
 }
-

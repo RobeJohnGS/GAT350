@@ -13,4 +13,3 @@ namespace JREngine
 		m_frameTimePoint = clock::now();
 	}
 }
-

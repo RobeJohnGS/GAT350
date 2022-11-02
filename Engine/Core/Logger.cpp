@@ -1,7 +1,6 @@
 #include "Logger.h"
 #include <cstdarg>
 #include <iostream>
-#include <windows.h>
 
 namespace JREngine
 {
@@ -11,15 +10,11 @@ namespace JREngine
 	{
 		va_list args;
 		va_start(args, format);
-				
+
 		char str[1024];
 		vsprintf_s(str, 1024, format, args);
 
 		std::cout << str << std::endl;
-				
-		//WCHAR str[1024];
-		//_vsnwprintf(str, 1024, format, args);
-		//OutputDebugString(str);
 
 		va_end(args);
 	}

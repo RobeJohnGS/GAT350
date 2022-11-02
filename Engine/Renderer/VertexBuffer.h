@@ -1,9 +1,10 @@
 #pragma once
 #include "Renderer.h"
-#include "Resource/Resource.h"
+#include "Resource\Resource.h"
 #include <vector>
 
-namespace JREngine {
+namespace JREngine
+{
 	class VertexBuffer : public Resource
 	{
 	public:
@@ -16,7 +17,8 @@ namespace JREngine {
 		void CreateVertexBuffer(GLsizei size, GLsizei m_vertexCount, void* data);
 		void SetAttribute(int index, GLint size, GLsizei stride, size_t offset);
 
-		void CreateIndexBuffer(GLenum indextype, GLsizei count, void* data);
+		// index buffer
+		void CreateIndexBuffer(GLenum indexType, GLsizei count, void* data);
 
 		virtual void Draw(GLenum primitiveType = GL_TRIANGLES);
 
@@ -28,8 +30,8 @@ namespace JREngine {
 		GLuint m_vbo = 0; // vertex buffer object
 		GLuint m_vertexCount = 0; // number of vertices in vertex buffer
 
-		GLuint m_ibo = 0; // Index Buffer Object
-		GLuint m_indexCount = 0; // Number of indeces in index buffer
-		GLenum m_indexType = 0; // Type of Index
+		GLuint m_ibo = 0; // index buffer object
+		GLuint m_indexCount = 0; // number of indices in index buffer
+		GLenum m_indexType = 0; // data type of index
 	};
 }

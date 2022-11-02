@@ -1,5 +1,6 @@
 #pragma once
 
+
 namespace JREngine
 {
 	struct Rect

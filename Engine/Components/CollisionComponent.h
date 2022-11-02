@@ -14,7 +14,7 @@ namespace JREngine
 	public:
 		CLASS_DECLARATION(CollisionComponent)
 
-		virtual void Initialize() override;
+			virtual void Initialize() override;
 		virtual void Update() override;
 
 		virtual void OnCollisionEnter(Actor* other) override;
@@ -28,7 +28,7 @@ namespace JREngine
 
 	private:
 		PhysicsSystem::CollisionData data;
-		Vector2 scale_offset = Vector2{ 1, 1 };
+		Vector2 scale_offset = { 1, 1 };
 
 		functionPtr m_enterFunction;
 		functionPtr m_exitFunction;

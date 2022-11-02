@@ -14,7 +14,7 @@ namespace JREngine
 
 	namespace json
 	{
-		bool Load(const std::string& filename, rapidjson::Document& document);
+		bool Load(const std::string filename, rapidjson::Document& document);
 
 		bool Get(const rapidjson::Value& value, const std::string& name, int& data);
 		bool Get(const rapidjson::Value& value, const std::string& name, float& data);

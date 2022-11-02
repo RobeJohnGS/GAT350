@@ -3,6 +3,7 @@
 #include <variant>
 #include <functional>
 
+
 namespace JREngine
 {
 	class GameObject;
@@ -14,7 +15,7 @@ namespace JREngine
 
 	public:
 		std::string name;
-		GameObject* receiver = nullptr;
+		GameObject* reciever = nullptr;
 		std::variant<int, bool, float, std::string> data;
 	};
 
@@ -23,5 +24,4 @@ namespace JREngine
 	public:
 		virtual void OnNotify(const Event& event) = 0;
 	};
-
 }

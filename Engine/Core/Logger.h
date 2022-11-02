@@ -1,9 +1,9 @@
 #pragma once
 
 #ifdef _DEBUG
-	#define	LOG(format, ...) JREngine::g_logger.Log(format, __VA_ARGS__)
+#define LOG(format, ...) JREngine::g_logger.Log(format, __VA_ARGS__)
 #else
-	#define LOG(format, ...) ((void)0)
+#define LOG(format, ...) ((void)0)
 #endif // _DEBUG
 
 
@@ -22,4 +22,4 @@ namespace JREngine
 	};
 
 	extern Logger g_logger;
-}
+};

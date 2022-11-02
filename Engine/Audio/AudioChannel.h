@@ -2,7 +2,6 @@
 
 namespace FMOD
 {
-	// ! forward declare FMOD Channel
 	class Channel;
 }
 
@@ -12,7 +11,7 @@ namespace JREngine
 	{
 	public:
 		AudioChannel() = default;
-		AudioChannel(FMOD::Channel* channel) : m_channel{ channel } {}
+		AudioChannel(FMOD::Channel* channel) : m_channel{ channel } { }
 
 		bool IsPlaying();
 		void Stop();

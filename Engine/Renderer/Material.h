@@ -1,30 +1,29 @@
-#pragma once
-#include "Resource/Resource.h"
-#include "Math/MathUtils.h"
-#include <vector>
-#include <memory>
+#pragma once 
+#include "Resource/Resource.h" 
+#include "Math/MathUtils.h" 
+#include <vector> 
+#include <memory> 
 
-namespace JREngine {
+namespace JREngine
+{
 	class Texture;
 	class Program;
 
-	class Material : public Resource {
+	class Material : public Resource
+	{
 	public:
-		
-
-		// Inherited via Resource
-		virtual bool Create(std::string name, ...) override;
+		virtual bool Create(std::string filename, ...) override;
 
 		void Bind();
-		std::shared_ptr<Program> GetProgram() {
-			return m_program;
-		}
 
-		//variables
-		glm::vec3 ambient;
-		glm::vec3 diffuse;
-		glm::vec3 specular;
+		std::shared_ptr<Program> GetProgram() { return m_program; }
+
+	public:
+		glm::vec3 color;
 		float shininess = 0;
+
+		glm::vec2 uv_tiling{1, 1};
+		glm::vec2 uv_offSet{1, 1};
 
 	private:
 		std::shared_ptr<Program> m_program;

@@ -9,9 +9,10 @@ namespace JREngine
 	{
 	public:
 		PlayerComponent() = default;
+
 		CLASS_DECLARATION(PlayerComponent)
 
-		void Initialize() override;
+			void Initialize() override;
 		void Update() override;
 
 		virtual void OnNotify(const Event& event) override;
@@ -22,8 +23,9 @@ namespace JREngine
 		virtual bool Read(const rapidjson::Value& value) override;
 
 	public:
-		float jump = 3000;
-		int m_groundCount = 0;
-	};
+		float jump = 300;
 
+		int m_groundCount = 0;
+
+	};
 }

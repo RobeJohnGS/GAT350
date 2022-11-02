@@ -12,5 +12,4 @@ namespace JREngine
 		m_resources.clear();
 	}
 
-
 }

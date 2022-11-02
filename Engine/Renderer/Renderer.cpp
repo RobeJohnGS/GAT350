@@ -1,12 +1,13 @@
-#include "Renderer.h"
+#include "Renderer.h" 
 #include "Texture.h"
 #include "Math/MathUtils.h"
 #include "Math/Transform.h"
 #include "Math/Rect.h"
 
 #include <SDL.h>
-#include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_image.h>
+
 
 namespace JREngine
 {
@@ -19,10 +20,11 @@ namespace JREngine
 
 	void Renderer::Shutdown()
 	{
+
 		SDL_GL_DeleteContext(m_context);
 		SDL_DestroyWindow(m_window);
-		TTF_Quit();
 		IMG_Quit();
+		TTF_Quit();
 	}
 
 	void Renderer::CreateWindow(const char* name, int width, int height, bool fullscreen)
@@ -32,12 +34,11 @@ namespace JREngine
 
 		int flags = (fullscreen) ? SDL_WINDOW_FULLSCREEN : (SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
-		m_window = SDL_CreateWindow(name, 100, 100, width, height, SDL_WINDOW_OPENGL
-			| flags);
+		m_window = SDL_CreateWindow(name, 100, 100, width, height, SDL_WINDOW_OPENGL | flags);
 
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
@@ -88,56 +89,73 @@ namespace JREngine
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle, const Vector2& scale, const Vector2& registration)
 	{
-		/*Vector2 size = texture->GetSize();
+		/*
+		Vector2 size = texture->GetSize();
 		size = size * scale;
+
 		Vector2 origin = size * registration;
 		Vector2 tposition = position - origin;
+
 		SDL_Rect dest;
-		dest.x = (int)(tposition.x);
-		dest.y = (int)(tposition.y);
-		dest.w = (int)(size.x);
-		dest.h = (int)(size.y);
-		SDL_Point center{ (int)origin.x, (int)origin.y };*/
+		dest.x = (int)tposition.x;
+		dest.y = (int)tposition.y;
+		dest.w = (int)size.x;
+		dest.h = (int)size.y;
+
+		SDL_Point center{ (int)origin.x, (int)origin.y };
 
 		//SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, angle, &center, SDL_FLIP_NONE);
+	*/
 	}
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration)
 	{
-		/*Vector2 size = texture->GetSize();
+		/*
+		Vector2 size = texture->GetSize();
 		size = size * transform.scale;
+
 		Vector2 origin = size * registration;
 		Vector2 tposition = transform.position - origin;
+
 		SDL_Rect dest;
-		dest.x = (int)(tposition.x);
-		dest.y = (int)(tposition.y);
-		dest.w = (int)(size.x);
-		dest.h = (int)(size.y);
-		SDL_Point center{ (int)origin.x, (int)origin.y };*/
+		dest.x = (int)tposition.x;
+		dest.y = (int)tposition.y;
+		dest.w = (int)size.x;
+		dest.h = (int)size.y;
+
+		SDL_Point center{ (int)origin.x, (int)origin.y };
 
 		//SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
+	*/
 	}
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration, bool flipH)
 	{
-		/*Matrix3x3 mx = m_viewport * m_view * transform.matrix;
-		Vector2 size = Vector2{ source.w, source.h };
+		/*
+		Matrix3x3 mx = m_viewport * m_view * transform.matrix;
+
+		Vector2 size = { source.w, source.h };
 		size = size * mx.GetScale();
+
 		Vector2 origin = size * registration;
 		Vector2 tposition = mx.GetTranslation() - origin;
+
 		SDL_Rect dest;
-		dest.x = (int)(tposition.x);
-		dest.y = (int)(tposition.y);
-		dest.w = (int)(size.x);
-		dest.h = (int)(size.y);
+		dest.x = (int)tposition.x;
+		dest.y = (int)tposition.y;
+		dest.w = (int)size.x;
+		dest.h = (int)size.y;
+
 		SDL_Rect src;
 		src.x = source.x;
 		src.y = source.y;
 		src.w = source.w;
 		src.h = source.h;
-		SDL_Point center{ (int)origin.x, (int)origin.y };
-		SDL_RendererFlip flip = (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;*/
-		//SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, math::RadToDeg(mx.GetRotation()), &center, flip);
-	}
 
+		SDL_Point center{ (int)origin.x, (int)origin.y };
+
+		SDL_RendererFlip flip = (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+		//SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, math::RadToDeg(mx.GetRotation()), &center, flip);
+		*/
+	}
 }

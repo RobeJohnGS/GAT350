@@ -15,21 +15,23 @@ namespace JREngine
 	const uint32_t key_down = SDL_SCANCODE_DOWN;
 	const uint32_t key_left = SDL_SCANCODE_LEFT;
 	const uint32_t key_right = SDL_SCANCODE_RIGHT;
-	const uint32_t key_down_y = SDL_SCANCODE_C;
+
+	const uint32_t key_w = SDL_SCANCODE_W;
+	const uint32_t key_a = SDL_SCANCODE_A;
+	const uint32_t key_s = SDL_SCANCODE_S;
+	const uint32_t key_d = SDL_SCANCODE_D;
+	const uint32_t key_q = SDL_SCANCODE_Q;
+	const uint32_t key_e = SDL_SCANCODE_E;
+	const uint32_t key_LShift = SDL_SCANCODE_LSHIFT;
+	const uint32_t key_LCtrl = SDL_SCANCODE_LCTRL;
 
 	void InputSystem::Initialize()
 	{
-		int numKeys;
-		// get pointer to sdl keyboard states and number of keys
-		const uint8_t* keyboardState = SDL_GetKeyboardState(&numKeys);
+		const uint8_t* keyboardState = SDL_GetKeyboardState(&m_numKeys);
 
-		// resize of keyboard state using numKeys for size
-		m_keyboardState.resize(numKeys);
+		m_keyboardState.resize(m_numKeys);
+		std::copy(keyboardState, keyboardState + m_numKeys, m_keyboardState.begin());
 
-		// copy the sdl key states to keyboard state
-		std::copy(keyboardState, keyboardState + numKeys, m_keyboardState.begin());
-
-		// set previous keyboard state to current keyboard state
 		m_prevKeyboardState = m_keyboardState;
 	}
 
@@ -43,87 +45,76 @@ namespace JREngine
 		SDL_Event event;
 		SDL_PollEvent(&event);
 
-		// save previous keyboard state
+		//save previous keyboard state
 		m_prevKeyboardState = m_keyboardState;
 
-		// get current keyboard state
+		//get current keyboard state
 		const uint8_t* keyboardState = SDL_GetKeyboardState(nullptr);
-		std::copy(keyboardState, keyboardState + m_keyboardState.size(), m_keyboardState.begin());
+		std::copy(keyboardState, keyboardState + m_numKeys, m_keyboardState.begin());
 
-		// mouse
+		// save prev mouse state
+		m_prevMouseButtonState = m_mouseButtonState;
+
+		// get current mouse state
 		m_prevMouseButtonState = m_mouseButtonState;
 		int x, y;
 		uint32_t buttons = SDL_GetMouseState(&x, &y);
-		m_mousePosition = JREngine::Vector2{ (float)x , (float)y };
-		m_mouseButtonState[0] = buttons & SDL_BUTTON_LMASK; // buttons [0001] & [0RML]
-		m_mouseButtonState[1] = buttons & SDL_BUTTON_MMASK; // buttons [0010] & [0RML]
+		m_mousePosition = JREngine::Vector2{ x , y };
+		m_mouseButtonState[0] = buttons & SDL_BUTTON_LMASK; // buttons [0001] & [0RML] 
+		m_mouseButtonState[1] = buttons & SDL_BUTTON_MMASK; // buttons [0010] & [0RML] 
 		m_mouseButtonState[2] = buttons & SDL_BUTTON_RMASK; // buttons [0100] & [0RML]
+
 	}
 
-	InputSystem::KeyState InputSystem::GetKeyState(uint32_t key)
+	InputSystem::State InputSystem::GetKeyState(uint32_t key)
 	{
-		KeyState keyState = KeyState::Idle;
+		State keyState = State::Idle;
 
 		bool keyDown = GetKeyDown(key);
 		bool prevKeyDown = GetPreviousKeyDown(key);
 
-		if (keyDown)
+		if (keyDown == true && prevKeyDown == true)
 		{
-			keyState = (prevKeyDown) ? KeyState::Held : KeyState::Pressed;
+			keyState = State::Held;
 		}
-		else
+		else if (keyDown == true && prevKeyDown == false)
 		{
-			keyState = (prevKeyDown) ? KeyState::Released : KeyState::Idle;
+			keyState = State::Pressed;
+		}
+		else if (keyDown == false && prevKeyDown == true)
+		{
+			keyState = State::Released;
+		}
+		else if (keyDown == false && prevKeyDown == false)
+		{
+			keyState = State::Idle;
 		}
 
 		return keyState;
 	}
 
-	InputSystem::KeyState InputSystem::GetKeyState(const std::string& key)
+	InputSystem::State InputSystem::GetButtonState(uint32_t button)
 	{
-		//if (m_keyMap.find(key) != m_keyMap.end())
-		//{
-		//	return GetKeyState(m_keyMap[key]);
-		//}
+		State keyState = State::Idle;
 
-		return KeyState::Idle;
-	}
+		bool keyDown = GetButtonDown(button);
+		bool prevKeyDown = GetPreviousButtonDown(button);
 
-	bool InputSystem::GetKeyDown(const std::string& key)
-	{
-		//if (m_keyMap.find(key) != m_keyMap.end())
-		//{
-		//	return m_keyboardState[m_keyMap[key]];
-		//}
-		
-		return false;
-	}
-
-	bool InputSystem::GetPreviousKeyDown(const std::string& key)
-	{
-		//if (m_keyMap.find(key) != m_keyMap.end())
-		//{
-		//	return m_prevKeyboardState[m_keyMap[key]];
-		//}
-
-		return false;
-	}
-
-
-	InputSystem::KeyState InputSystem::GetButtonState(uint32_t button)
-	{
-		KeyState keyState = KeyState::Idle;
-
-		bool buttonDown = GetButtonDown(button);
-		bool prevButtonDown = GetPreviousButtonDown(button);
-
-		if (buttonDown)
+		if (keyDown == true && prevKeyDown == true)
 		{
-			keyState = (prevButtonDown) ? KeyState::Held : KeyState::Pressed;
+			keyState = State::Held;
 		}
-		else
+		else if (keyDown == true && prevKeyDown == false)
 		{
-			keyState = (prevButtonDown) ? KeyState::Released : KeyState::Idle;
+			keyState = State::Pressed;
+		}
+		else if (keyDown == false && prevKeyDown == true)
+		{
+			keyState = State::Released;
+		}
+		else if (keyDown == false && prevKeyDown == false)
+		{
+			keyState = State::Idle;
 		}
 
 		return keyState;

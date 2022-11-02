@@ -5,7 +5,6 @@ namespace JREngine
 {
 	const float PhysicsSystem::pixelsPerUnit = 48.0f;
 
-
 	void PhysicsSystem::Initialize()
 	{
 		b2Vec2 gravity{ 0, 10 };
@@ -58,7 +57,6 @@ namespace JREngine
 
 		body->CreateFixture(&fixtureDef);
 	}
-
 	void PhysicsSystem::SetCollisionBoxStatic(b2Body* body, const CollisionData& data, Actor* actor)
 	{
 		Vector2 worldSize = PhysicsSystem::ScreenToWorld(data.size * 0.5f);
@@ -85,4 +83,3 @@ namespace JREngine
 		body->CreateFixture(&fixtureDef);
 	}
 }
-

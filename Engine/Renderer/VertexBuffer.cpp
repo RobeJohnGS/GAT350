@@ -1,6 +1,7 @@
 #include "VertexBuffer.h"
 
-namespace JREngine {
+namespace JREngine
+{
 	VertexBuffer::VertexBuffer()
 	{
 		glGenVertexArrays(1, &m_vao);
@@ -11,7 +12,7 @@ namespace JREngine {
 	{
 	}
 
-	bool VertexBuffer::Create(std::string name, ...)
+	bool JREngine::VertexBuffer::Create(std::string name, ...)
 	{
 		return true;
 	}
@@ -44,8 +45,6 @@ namespace JREngine {
 
 	void VertexBuffer::Draw(GLenum primitiveType)
 	{
-		glBindVertexArray(m_vao);
-
 		if (m_ibo)
 		{
 			glDrawElements(primitiveType, m_indexCount, m_indexType, 0);
