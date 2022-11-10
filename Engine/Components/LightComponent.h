@@ -6,6 +6,13 @@ namespace JREngine
 	class LightComponent : public Component
 	{
 	public:
+		enum class Type {
+			Point,
+			Directional,
+			Spot
+		};
+
+	public:
 		CLASS_DECLARATION(LightComponent)
 
 			void Update() override;
@@ -15,5 +22,9 @@ namespace JREngine
 
 	public:
 		glm::vec3 color{ 0 };
+		Type type = Type::Point;
+
+		float cutoff = 45.0f;
+		float exponent = 50.0f;
 	};
 }

@@ -22,6 +22,15 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{4bd2e8e7-c81d-4e3e-9fd8-89f212e33c13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\Toon">
+      <UniqueIdentifier>{a5173b30-4c15-49f2-b125-3ebd12d3c18a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Texture">
+      <UniqueIdentifier>{faf536ec-07e0-4b32-94a8-bed2272305c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Normal">
+      <UniqueIdentifier>{d023aafc-7166-4e43-adfa-59c515194894}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -41,43 +50,28 @@
     <None Include="..\Build\Assets\Materials\spot.mtrl">
       <Filter>Resource Files\Materials</Filter>
     </None>
-    <None Include="..\Build\Assets\Scenes\texture.scn">
-      <Filter>Resource Files\Scenes</Filter>
-    </None>
     <None Include="..\Build\Assets\Materials\multi.mtrl">
       <Filter>Resource Files\Materials</Filter>
     </None>
-    <None Include="..\Build\Assets\Shaders\texture_phong.frag">
-      <Filter>Resource Files\Shaders</Filter>
+    <None Include="..\Build\Assets\Scenes\assignment.scn">
+      <Filter>Resource Files\Scenes</Filter>
     </None>
-    <None Include="..\Build\Assets\Shaders\texture_phong.prog">
-      <Filter>Resource Files\Shaders</Filter>
+    <None Include="..\Build\Assets\Scenes\emissive.scn">
+      <Filter>Resource Files\Scenes</Filter>
     </None>
-    <None Include="..\Build\Assets\Shaders\texture_phong.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Build\Assets\Shaders\basic.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Build\Assets\Shaders\basic.prog">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Build\Assets\Scenes\basic.scn">
-      <Filter>Resource Files\Shaders</Filter>
+    <None Include="..\Build\Assets\Scenes\texture.scn">
+      <Filter>Resource Files\Scenes</Filter>
     </None>
     <None Include="..\Build\Assets\Shaders\basic.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Build\Assets\Shaders\basic_lit.frag">
+    <None Include="..\Build\Assets\Shaders\basic_Lit.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Build\Assets\Shaders\basic_lit.prog">
+    <None Include="..\Build\Assets\Shaders\basic_Lit.prog">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Build\Assets\Scenes\basic_lit.scn">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Build\Assets\Shaders\basic_lit.vert">
+    <None Include="..\Build\Assets\Shaders\basic_Lit.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Build\Assets\Shaders\basic_phong.frag">
@@ -89,8 +83,71 @@
     <None Include="..\Build\Assets\Shaders\basic_phong.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Build\Assets\Scenes\openGl.scn">
-      <Filter>Resource Files\Scenes</Filter>
+    <None Include="..\Build\Assets\Shaders\emissive_phong.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\emissive_phong.prog">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\emissive_phong.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\texture_phong.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\basic.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\basic.prog">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\FX\toon.frag">
+      <Filter>Resource Files\Shaders\Toon</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\FX\toon.prog">
+      <Filter>Resource Files\Shaders\Toon</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\FX\toon.vert">
+      <Filter>Resource Files\Shaders\Toon</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Lit\texture.prog">
+      <Filter>Resource Files\Shaders\Texture</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Lit\texture.vert">
+      <Filter>Resource Files\Shaders\Texture</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Lit\texture_normal.frag">
+      <Filter>Resource Files\Shaders\Texture</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Lit\texture_normal.prog">
+      <Filter>Resource Files\Shaders\Texture</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Lit\texture_normal.vert">
+      <Filter>Resource Files\Shaders\Texture</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Lit\texture.frag">
+      <Filter>Resource Files\Shaders\Texture</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Unlit\texture.frag">
+      <Filter>Resource Files\Shaders\Normal</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Unlit\texture.prog">
+      <Filter>Resource Files\Shaders\Normal</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Unlit\texture.vert">
+      <Filter>Resource Files\Shaders\Normal</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Unlit\color.frag">
+      <Filter>Resource Files\Shaders\Normal</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Unlit\color.prog">
+      <Filter>Resource Files\Shaders\Normal</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Unlit\color.vert">
+      <Filter>Resource Files\Shaders\Normal</Filter>
+    </None>
+    <None Include="..\Build\Assets\Materials\squirrel.mtrl">
+      <Filter>Resource Files\Materials</Filter>
     </None>
   </ItemGroup>
 </Project>

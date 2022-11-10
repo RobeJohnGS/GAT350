@@ -17,12 +17,10 @@ int main(int argc, char** argv)
 
 	JREngine::g_renderer.CreateWindow("JRGame", 800, 600, 0);
 
-	LOG("Window Created...");
+	LOG("Window Initialized...");
 
-	auto material = JREngine::g_resources.Get<JREngine::Material>("Materials/multi.mtrl");
-	
-
-	auto scene = JREngine::g_resources.Get<JREngine::Scene>("Scenes/openGl.scn");
+	// load scene 
+	auto scene = JREngine::g_resources.Get<JREngine::Scene>("Scenes/texture.scn");
 
 	bool quit = false;
 	while (!quit)
@@ -31,13 +29,19 @@ int main(int argc, char** argv)
 
 		if (JREngine::g_inputSystem.GetKeyState(JREngine::key_escape) == JREngine::InputSystem::State::Pressed) quit = true;
 
+		auto actor = scene->GetActorFromName("Ogre");
+
+		actor = scene->GetActorFromName("Light");
+		if (actor)
+		{
+			//actor->m_transform.position.x = std::sin(JREngine::g_time.time);
+		}
+
 		scene->Update();
 
 		JREngine::g_renderer.BeginFrame();
 
-		//draw scene
 		scene->Draw(JREngine::g_renderer);
-		
 
 		JREngine::g_renderer.EndFrame();
 	}
