@@ -108,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\assimp\include;$(SolutionDir)ThirdParty\glm;$(SolutionDir)ThirdParty\SDL2-2.0.22\include;$(SolutionDir)ThirdParty\glad\include;$(SolutionDir)ThirdParty\box2d\include;$(SolutionDir)ThirdParty\rapidjson\include;$(SolutionDir)Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\imgui;$(SolutionDir)ThirdParty\assimp\include;$(SolutionDir)ThirdParty\glm;$(SolutionDir)ThirdParty\SDL2-2.0.22\include;$(SolutionDir)ThirdParty\glad\include;$(SolutionDir)ThirdParty\box2d\include;$(SolutionDir)ThirdParty\rapidjson\include;$(SolutionDir)Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -147,9 +147,11 @@
     <None Include="..\Build\Assets\Materials\grass.mtrl" />
     <None Include="..\Build\Assets\Materials\multi.mtrl" />
     <None Include="..\Build\Assets\Materials\ogre.mtrl" />
+    <None Include="..\Build\Assets\Materials\skybox.mtrl" />
     <None Include="..\Build\Assets\Materials\spot.mtrl" />
     <None Include="..\Build\Assets\Materials\squirrel.mtrl" />
     <None Include="..\Build\Assets\Scenes\assignment.scn" />
+    <None Include="..\Build\Assets\Scenes\cubemap.scn" />
     <None Include="..\Build\Assets\Scenes\emissive.scn" />
     <None Include="..\Build\Assets\Scenes\texture.scn" />
     <None Include="..\Build\Assets\Shaders\basic.frag" />
@@ -177,6 +179,9 @@
     <None Include="..\Build\Assets\Shaders\Unlit\color.frag" />
     <None Include="..\Build\Assets\Shaders\Unlit\color.prog" />
     <None Include="..\Build\Assets\Shaders\Unlit\color.vert" />
+    <None Include="..\Build\Assets\Shaders\Unlit\skybox.frag" />
+    <None Include="..\Build\Assets\Shaders\Unlit\skybox.prog" />
+    <None Include="..\Build\Assets\Shaders\Unlit\skybox.vert" />
     <None Include="..\Build\Assets\Shaders\Unlit\texture.frag" />
     <None Include="..\Build\Assets\Shaders\Unlit\texture.prog" />
     <None Include="..\Build\Assets\Shaders\Unlit\texture.vert" />

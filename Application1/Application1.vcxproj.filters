@@ -149,5 +149,20 @@
     <None Include="..\Build\Assets\Materials\squirrel.mtrl">
       <Filter>Resource Files\Materials</Filter>
     </None>
+    <None Include="..\Build\Assets\Scenes\cubemap.scn">
+      <Filter>Resource Files\Scenes</Filter>
+    </None>
+    <None Include="..\Build\Assets\Materials\skybox.mtrl">
+      <Filter>Resource Files\Materials</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Unlit\skybox.prog">
+      <Filter>Resource Files\Shaders\Normal</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Unlit\skybox.vert">
+      <Filter>Resource Files\Shaders\Normal</Filter>
+    </None>
+    <None Include="..\Build\Assets\Shaders\Unlit\skybox.frag">
+      <Filter>Resource Files\Shaders\Normal</Filter>
+    </None>
   </ItemGroup>
 </Project>

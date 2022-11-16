@@ -3,6 +3,9 @@
 
 namespace JREngine
 {
+	//forward declaration
+	class Program;
+
 	class LightComponent : public Component
 	{
 	public:
@@ -12,14 +15,16 @@ namespace JREngine
 			Spot
 		};
 
+
 	public:
 		CLASS_DECLARATION(LightComponent)
 
-			void Update() override;
+		void Update() override;
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
+		void SetProgram(std::shared_ptr<Program> program, int index);
 	public:
 		glm::vec3 color{ 0 };
 		Type type = Type::Point;

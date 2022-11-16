@@ -48,7 +48,48 @@ namespace JREngine
 		}
 	}
 
-	void Scene::Draw(Renderer& renderer)
+	void Scene::PreRender(Renderer& renderer)
+	{
+		CameraComponent* camera = nullptr;
+		for (auto& actor : m_actors) {
+			if (!actor->IsActive()) {
+				continue;
+			}
+
+			auto component = actor->GetComponent<CameraComponent>();
+			if (component) {
+				camera = component;
+				break;
+			}
+		}
+
+		std::vector<LightComponent*> lights;
+		for (auto& actor : m_actors) {
+			if (!actor->IsActive()) {
+				continue;
+			}
+
+			auto component = actor->GetComponent<LightComponent>();
+			if (component) {
+				lights.push_back(component);
+			}
+		}
+
+		auto programs = g_resources.Get<Program>();
+		for (auto& program : programs) {
+			camera->SetProgram(program);
+
+			int index = 0;
+			for (auto light : lights) {
+				light->SetProgram(program, index++);
+			}
+
+			program->SetUniform("light_count", index);
+			program->SetUniform("ambient_color", g_renderer.ambient_color);
+		}
+	}
+
+	void Scene::Render(Renderer& renderer)
 	{
 		// get camera / set renderer view/projection 
 		auto camera = GetActorFromName("Camera");
@@ -73,6 +114,9 @@ namespace JREngine
 
 	bool Scene::Read(const rapidjson::Value& value)
 	{
+		READ_NAME_DATA(value, "clear_color", g_renderer.clear_color);
+		READ_NAME_DATA(value, "ambient_color", g_renderer.ambient_color);
+
 		if (!value.HasMember("actors") || !value["actors"].IsArray())
 		{
 			return false;

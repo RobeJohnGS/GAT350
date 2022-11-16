@@ -41,4 +41,10 @@ namespace JREngine
 
 		return true;
 	}
+	
+	void CameraComponent::SetProgram(std::shared_ptr<Program> program){
+		program->Use();
+		program->SetUniform("view", m_view);
+		program->SetUniform("projection", m_projection);
+	}
 }

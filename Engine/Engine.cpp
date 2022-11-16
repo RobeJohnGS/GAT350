@@ -9,6 +9,7 @@ namespace JREngine
 	ResourceManager g_resources;
 	PhysicsSystem g_physicsSystem;
 	EventManager g_eventManager;
+	GUI g_GUI;
 
 	void Engine::Initialize()
 	{
@@ -22,11 +23,18 @@ namespace JREngine
 
 	void Engine::Update()
 	{
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			g_GUI.Update(event);
+		}
+
 		g_time.Tick();
 		g_eventManager.Update();
 		g_physicsSystem.Update();
 		g_inputSystem.Update();
 		g_audio.Update();
+
+		
 	}
 
 	void Engine::Shutdown()
@@ -38,6 +46,7 @@ namespace JREngine
 		g_resources.Shutdown();
 		g_inputSystem.Shutdown();
 		g_audio.Shutdown();
+		g_GUI.Shutdown();
 		g_renderer.Shutdown();
 	}
 

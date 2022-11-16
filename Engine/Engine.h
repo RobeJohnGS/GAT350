@@ -3,6 +3,8 @@
 #include "Serialization/Json.h"
 #include "Renderer/Model.h"
 
+#include "Renderer/GUI.h"
+
 #include "Core/Memory.h"
 #include "Core/File.h"
 #include "Core/Time.h"
@@ -46,6 +48,7 @@
 #include "Renderer/Program.h"
 #include "Renderer/Material.h"
 #include "Renderer/VertexBuffer.h"
+#include "Renderer/CubemapTexture.h"
 
 #include "glm/glm.hpp"
 
@@ -63,6 +66,7 @@ namespace JREngine
 	extern ResourceManager g_resources;
 	extern PhysicsSystem g_physicsSystem;
 	extern EventManager g_eventManager;
+	extern GUI g_GUI;
 
 	class Engine : public Singleton<Engine>
 	{

@@ -23,7 +23,7 @@ namespace JREngine
 
 		bool CreateFromSurface(SDL_Surface* surface, Renderer& renderer);
 
-		bool Load(const std::string& filename, Renderer& renderer);
+		bool Load(const std::string& filename);
 
 		void SetActive(GLuint unit) { glActiveTexture(unit); }
 		void Bind() { glBindTexture(m_target, m_texture); }
@@ -37,7 +37,7 @@ namespace JREngine
 	private:
 		void FlipSurface(SDL_Surface* surface);
 
-	private:
+	protected:
 		GLuint m_texture = 0;
 		GLenum m_target = GL_TEXTURE_2D;
 	};
