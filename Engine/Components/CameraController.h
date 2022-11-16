@@ -8,12 +8,17 @@ namespace JREngine
 	public:
 		CLASS_DECLARATION(CameraController)
 
-			void Update() override;
+		void Initialize() override;
+		void Update() override;
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
-	private:
 		float speed = 0;
+		
+	private:
+		float m_yaw = 0;
+		float m_pitch = 0;
+
 	};
 }

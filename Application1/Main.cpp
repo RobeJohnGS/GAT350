@@ -24,7 +24,7 @@ int main(int argc, char** argv)
 	auto scene = JREngine::g_resources.Get<JREngine::Scene>("Scenes/texture.scn");
 
 	float x = 0;
-	glm::vec3 position{ 0, 0, 0 };
+	glm::vec3 rot{ 0, 0, 0 };
 
 	bool quit = false;
 	while (!quit)
@@ -38,16 +38,16 @@ int main(int argc, char** argv)
 
 		if (JREngine::g_inputSystem.GetKeyState(JREngine::key_escape) == JREngine::InputSystem::State::Pressed) quit = true;
 
-		auto actor = scene->GetActorFromName("Ogre");
+		auto actor = scene->GetActorFromName("Squirrel");
 
-		actor = scene->GetActorFromName("Light");
+		//actor = scene->GetActorFromName("Light");
 		if (actor)
 		{
-			actor->m_transform.position = position;
+			actor->m_transform.rotation = math::EulerToQuaternion(rot);
 		}
 
 		ImGui::Begin("hello");
-		ImGui::SliderFloat3("X", &position[0], -4.0f, 4.0f);
+		ImGui::SliderFloat3("Rotation", &rot[0], -360.0f, 360.0f);
 		ImGui::End();
 
 		scene->Update();

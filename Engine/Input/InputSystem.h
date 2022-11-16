@@ -1,5 +1,6 @@
 #pragma once
 #include "../Math/Vector2.h"
+#include "Math/MathUtils.h"
 #include <cstdint>
 #include <array>
 #include <vector>
@@ -30,7 +31,8 @@ namespace JREngine
 		bool GetKeyDown(int key) { return m_keyboardState[key]; }
 		bool GetPreviousKeyDown(uint32_t key) { return m_prevKeyboardState[key]; }
 
-		const Vector2& GetMousePosition() const { return m_mousePosition; }
+		const glm::vec2& GetMousePosition() const { return m_mousePosition; }
+		const glm::vec2& GetMouseRelative() const { return m_mouseRelative; }
 
 		State GetButtonState(uint32_t button);
 		bool GetButtonDown(uint32_t button) { return m_mouseButtonState[button]; }
@@ -42,7 +44,11 @@ namespace JREngine
 		std::vector<uint8_t> m_keyboardState;
 		std::vector<uint8_t> m_prevKeyboardState;
 
-		Vector2 m_mousePosition;
+		//titties
+		//make a glm::vec2
+		glm::vec2 m_mousePosition;
+		glm::vec2 m_prevMousePos;
+		glm::vec2 m_mouseRelative;
 
 		std::array<uint8_t, 3> m_mouseButtonState;
 		std::array<uint8_t, 3> m_prevMouseButtonState;

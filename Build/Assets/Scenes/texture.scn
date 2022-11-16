@@ -4,7 +4,7 @@
   "actors": [
     {
       "type": "Actor",
-      "name": "Ogre",
+      "name": "Squirrel",
       "transform": {
         "position": [
           0,
