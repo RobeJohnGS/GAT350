@@ -144,15 +144,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Build\Assets\Materials\box.mtrl" />
+    <None Include="..\Build\Assets\Materials\clock-town.mtrl" />
     <None Include="..\Build\Assets\Materials\grass.mtrl" />
     <None Include="..\Build\Assets\Materials\multi.mtrl" />
     <None Include="..\Build\Assets\Materials\ogre.mtrl" />
+    <None Include="..\Build\Assets\Materials\reflection.mtrl" />
+    <None Include="..\Build\Assets\Materials\refraction.mtrl" />
+    <None Include="..\Build\Assets\Materials\rtt.mtrl" />
     <None Include="..\Build\Assets\Materials\skybox.mtrl" />
     <None Include="..\Build\Assets\Materials\spot.mtrl" />
     <None Include="..\Build\Assets\Materials\squirrel.mtrl" />
     <None Include="..\Build\Assets\Scenes\assignment.scn" />
     <None Include="..\Build\Assets\Scenes\cubemap.scn" />
     <None Include="..\Build\Assets\Scenes\emissive.scn" />
+    <None Include="..\Build\Assets\Scenes\rtt.scn" />
     <None Include="..\Build\Assets\Scenes\texture.scn" />
     <None Include="..\Build\Assets\Shaders\basic.frag" />
     <None Include="..\Build\Assets\Shaders\basic.prog" />
@@ -166,6 +171,12 @@
     <None Include="..\Build\Assets\Shaders\emissive_phong.frag" />
     <None Include="..\Build\Assets\Shaders\emissive_phong.prog" />
     <None Include="..\Build\Assets\Shaders\emissive_phong.vert" />
+    <None Include="..\Build\Assets\Shaders\FX\reflection.frag" />
+    <None Include="..\Build\Assets\Shaders\FX\reflection.prog" />
+    <None Include="..\Build\Assets\Shaders\FX\reflection.vert" />
+    <None Include="..\Build\Assets\Shaders\FX\refraction.frag" />
+    <None Include="..\Build\Assets\Shaders\FX\refraction.prog" />
+    <None Include="..\Build\Assets\Shaders\FX\refraction.vert" />
     <None Include="..\Build\Assets\Shaders\FX\toon.frag" />
     <None Include="..\Build\Assets\Shaders\FX\toon.prog" />
     <None Include="..\Build\Assets\Shaders\FX\toon.vert" />
