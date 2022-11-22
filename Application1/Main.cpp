@@ -68,6 +68,13 @@ int main(int argc, char** argv)
 		ImGui::End();
 
 		scene->Update();
+		{
+			auto actor = scene->GetActorFromName("RTT");
+			if (actor)
+			{
+				actor->SetActive(false);
+			}
+		}
 		//render pass 1
 		glViewport(0, 0, 512, 512);
 		framebuffer->Bind();
@@ -76,6 +83,14 @@ int main(int argc, char** argv)
 		scene->PreRender(JREngine::g_renderer);
 		scene->Render(JREngine::g_renderer);
 		framebuffer->Unbind();
+
+		{
+			auto actor = scene->GetActorFromName("RTT");
+			if (actor)
+			{
+				actor->SetActive(true);
+			}
+		}
 
 		//render pass 2
 		glViewport(0, 0, 800, 600);
