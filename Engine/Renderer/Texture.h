@@ -1,5 +1,5 @@
 #pragma once 
-#include "Math/Vector2.h" 
+#include "Math/MathUtils.h" 
 #include "Resource/Resource.h" 
 #include "Renderer.h" 
 #include <string> 
@@ -20,7 +20,6 @@ namespace JREngine
 		~Texture();
 
 		bool Create(std::string filename, ...) override;
-
 		bool CreateFromSurface(SDL_Surface* surface, Renderer& renderer);
 		bool CreateTexture(int width, int height);
 		bool CreateDepthTexture(int width, int height);
@@ -37,8 +36,9 @@ namespace JREngine
 		friend class Renderer;
 		friend class Framebuffer;
 
-	private:
+	protected:
 		void FlipSurface(SDL_Surface* surface);
+
 
 	protected:
 		GLuint m_texture = 0;

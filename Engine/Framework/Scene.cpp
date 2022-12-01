@@ -50,37 +50,51 @@ namespace JREngine
 
 	void Scene::PreRender(Renderer& renderer)
 	{
+		// get active camera component 
 		CameraComponent* camera = nullptr;
-		for (auto& actor : m_actors) {
-			if (!actor->IsActive()) {
+		for (auto& actor : m_actors)
+		{
+			if (!actor->IsActive())
+			{
 				continue;
 			}
 
 			auto component = actor->GetComponent<CameraComponent>();
-			if (component) {
+			if (component)
+			{
 				camera = component;
 				break;
 			}
 		}
 
+		// get light components 
 		std::vector<LightComponent*> lights;
-		for (auto& actor : m_actors) {
-			if (!actor->IsActive()) {
+		for (auto& actor : m_actors)
+		{
+			if (!actor->IsActive())
+			{
 				continue;
 			}
 
 			auto component = actor->GetComponent<LightComponent>();
-			if (component) {
+			if (component)
+			{
 				lights.push_back(component);
 			}
 		}
 
+		// get all shader programs in the resource system 
 		auto programs = g_resources.Get<Program>();
-		for (auto& program : programs) {
+		// set all shader programs camera and lights uniforms 
+		for (auto& program : programs)
+		{
+			// set camera in shader program 
 			camera->SetProgram(program);
 
+			// set lights in shader program 
 			int index = 0;
-			for (auto light : lights) {
+			for (auto light : lights)
+			{
 				light->SetProgram(program, index++);
 			}
 
@@ -114,6 +128,7 @@ namespace JREngine
 
 	bool Scene::Read(const rapidjson::Value& value)
 	{
+		// read clear color
 		READ_NAME_DATA(value, "clear_color", g_renderer.clear_color);
 		READ_NAME_DATA(value, "ambient_color", g_renderer.ambient_color);
 

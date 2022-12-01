@@ -23,9 +23,8 @@ namespace JREngine
 
 		CLASS_DECLARATION(Scene)
 
-		void Initialize() override;
+			void Initialize() override;
 		void Update() override;
-
 		void PreRender(Renderer& renderer);
 		void Render(Renderer& renderer);
 

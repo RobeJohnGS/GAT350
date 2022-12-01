@@ -69,6 +69,7 @@ namespace JREngine
 
 		return result;
 	}
+
 	template<typename T>
 	inline void ResourceManager::Add(const std::string& name, std::shared_ptr<T> resource)
 	{

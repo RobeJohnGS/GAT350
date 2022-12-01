@@ -1,5 +1,4 @@
 #pragma once
-#include "../Math/Vector2.h"
 #include "Math/MathUtils.h"
 #include <cstdint>
 #include <array>
@@ -44,10 +43,8 @@ namespace JREngine
 		std::vector<uint8_t> m_keyboardState;
 		std::vector<uint8_t> m_prevKeyboardState;
 
-		//titties
-		//make a glm::vec2
 		glm::vec2 m_mousePosition;
-		glm::vec2 m_prevMousePos;
+		glm::vec2 m_prevMousePosition;
 		glm::vec2 m_mouseRelative;
 
 		std::array<uint8_t, 3> m_mouseButtonState;

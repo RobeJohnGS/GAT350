@@ -34,7 +34,6 @@ namespace JREngine
 
     bool Texture::CreateTexture(int width, int height)
     {
-        //matthan smells like bugnus
         m_target = GL_TEXTURE_2D;
         m_width = width;
         m_height = height;
@@ -45,10 +44,16 @@ namespace JREngine
         // create texture (width, height)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
-        glTexParameteri(m_target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(m_target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        // Pixel Effect
+        glTexParameteri(m_target, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(m_target, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+        // Regular Effect
+        //glTexParameteri(m_target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        //glTexParameteri(m_target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(m_target, GL_TEXTURE_WRAP_S, GL_CLAMP);
         glTexParameteri(m_target, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
         return true;
     }
 
@@ -68,6 +73,7 @@ namespace JREngine
         glTexParameteri(m_target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(m_target, GL_TEXTURE_WRAP_S, GL_CLAMP);
         glTexParameteri(m_target, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
         return true;
     }
 

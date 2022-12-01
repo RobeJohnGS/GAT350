@@ -3,7 +3,8 @@
 
 namespace JREngine
 {
-	void CameraController::Initialize(){
+	void CameraController::Initialize()
+	{
 		glm::vec3 v = math::QuaternionToEuler(m_owner->m_transform.rotation);
 		m_pitch = v.x;
 		m_yaw = v.y;
@@ -12,9 +13,9 @@ namespace JREngine
 	void CameraController::Update()
 	{
 		// get camera rotation
-		if (g_inputSystem.GetButtonState(2) == InputSystem::Held)
+		if (g_inputSystem.GetButtonState(2) == InputSystem::State::Held)
 		{
-			glm::vec2 axis = g_inputSystem.GetMouseRelative() * 0.1f;
+			glm::vec2 axis = g_inputSystem.GetMouseRelative() * sensitivity;
 
 			m_yaw += axis.x;
 			m_pitch -= axis.y;
@@ -32,12 +33,12 @@ namespace JREngine
 
 		glm::vec3 direction{ 0 };
 
-		if (g_inputSystem.GetKeyState(key_a) == InputSystem::Held)		direction.x += 1;
-		if (g_inputSystem.GetKeyState(key_d) == InputSystem::Held)	direction.x -= 1;
-		if (g_inputSystem.GetKeyState(key_w) == InputSystem::Held)		direction.y += 1;
-		if (g_inputSystem.GetKeyState(key_s) == InputSystem::Held)		direction.y -= 1;
-		if (g_inputSystem.GetKeyState(key_e) == InputSystem::Held)	direction.z += 1;
-		if (g_inputSystem.GetKeyState(key_q) == InputSystem::Held)	direction.z -= 1;
+		if (g_inputSystem.GetKeyState(key_a) == InputSystem::State::Held)	direction.x += 1;
+		if (g_inputSystem.GetKeyState(key_d) == InputSystem::State::Held)	direction.x -= 1;
+		if (g_inputSystem.GetKeyState(key_w) == InputSystem::State::Held)	direction.y += 1;
+		if (g_inputSystem.GetKeyState(key_s) == InputSystem::State::Held)	direction.y -= 1;
+		if (g_inputSystem.GetKeyState(key_q) == InputSystem::State::Held)	direction.z += 1;
+		if (g_inputSystem.GetKeyState(key_e) == InputSystem::State::Held)	direction.z -= 1;
 
 		// convert world direction space to camera direction space
 		direction = m_owner->m_transform.rotation * direction;
@@ -52,6 +53,7 @@ namespace JREngine
 	bool CameraController::Read(const rapidjson::Value& value)
 	{
 		READ_DATA(value, speed);
+		READ_DATA(value, sensitivity);
 
 		return true;
 	}

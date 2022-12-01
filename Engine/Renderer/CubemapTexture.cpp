@@ -6,7 +6,8 @@
 #include <cstdarg> 
 #include <array>
 
-namespace JREngine {
+namespace JREngine
+{
 	bool CubemapTexture::Create(std::string filename, ...)
 	{
 		// va_list - type to hold information about variable arguments
@@ -23,10 +24,10 @@ namespace JREngine {
 
 		std::vector<std::string> filenames = GenerateCubeMapNames(filename, extension);
 
-
 		// create textures (returns true/false if successful)
 		return Load(filenames);
 	}
+
 	bool CubemapTexture::Load(const std::vector<std::string>& filenames)
 	{
 		m_target = GL_TEXTURE_CUBE_MAP;
