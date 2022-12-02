@@ -15,7 +15,7 @@ int main(int argc, char** argv)
 	JREngine::Engine::Instance().Register();
 	LOG("Engine Initialized...");
 
-	JREngine::g_renderer.CreateWindow("Gamer", 800, 600, 0);
+	JREngine::g_renderer.CreateWindow("JRGame", 800, 600, 0);
 	LOG("Window Initialized...");
 
 	JREngine::g_gui.Initialize(JREngine::g_renderer);
@@ -73,10 +73,7 @@ int main(int argc, char** argv)
 			program->SetUniform("offset", JREngine::g_time.time);
 		}*/
 
-		ImGui::Begin("Controls");
-		//ImGui::SliderFloat3("Position", &pos[0], -5.0f, 5.0f);
-		ImGui::DragFloat3("Rotation", &rot[0]);
-		ImGui::DragFloat("Refraction Index", &ri, 0.01f, 1, 3);
+		ImGui::Begin("GUI");
 		ImGui::End();
 
 		scene->Update();

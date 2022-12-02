@@ -144,10 +144,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Build\Assets\Materials\box.mtrl" />
-    <None Include="..\Build\Assets\Materials\clock-town.mtrl" />
+    <None Include="..\Build\Assets\Materials\emissive.mtrl" />
     <None Include="..\Build\Assets\Materials\grass.mtrl" />
+    <None Include="..\Build\Assets\Materials\ground.mtrl" />
     <None Include="..\Build\Assets\Materials\multi.mtrl" />
     <None Include="..\Build\Assets\Materials\ogre.mtrl" />
+    <None Include="..\Build\Assets\Materials\postprocess.mtrl" />
     <None Include="..\Build\Assets\Materials\reflection.mtrl" />
     <None Include="..\Build\Assets\Materials\refraction.mtrl" />
     <None Include="..\Build\Assets\Materials\rtt.mtrl" />
@@ -155,7 +157,9 @@
     <None Include="..\Build\Assets\Materials\spot.mtrl" />
     <None Include="..\Build\Assets\Materials\squirrel.mtrl" />
     <None Include="..\Build\Assets\Scenes\assignment.scn" />
-    <None Include="..\Build\Assets\Scenes\cubemap.scn" />
+    <None Include="..\Build\Assets\Scenes\basic.scn" />
+    <None Include="..\Build\Assets\Scenes\basic_Lit.scn" />
+    <None Include="..\Build\Assets\Scenes\Cubemap.scn" />
     <None Include="..\Build\Assets\Scenes\emissive.scn" />
     <None Include="..\Build\Assets\Scenes\rtt.scn" />
     <None Include="..\Build\Assets\Scenes\texture.scn" />
@@ -177,6 +181,9 @@
     <None Include="..\Build\Assets\Shaders\FX\refraction.frag" />
     <None Include="..\Build\Assets\Shaders\FX\refraction.prog" />
     <None Include="..\Build\Assets\Shaders\FX\refraction.vert" />
+    <None Include="..\Build\Assets\Shaders\FX\skybox.frag" />
+    <None Include="..\Build\Assets\Shaders\FX\skybox.prog" />
+    <None Include="..\Build\Assets\Shaders\FX\skybox.vert" />
     <None Include="..\Build\Assets\Shaders\FX\toon.frag" />
     <None Include="..\Build\Assets\Shaders\FX\toon.prog" />
     <None Include="..\Build\Assets\Shaders\FX\toon.vert" />
@@ -186,13 +193,13 @@
     <None Include="..\Build\Assets\Shaders\Lit\texture_normal.frag" />
     <None Include="..\Build\Assets\Shaders\Lit\texture_normal.prog" />
     <None Include="..\Build\Assets\Shaders\Lit\texture_normal.vert" />
+    <None Include="..\Build\Assets\Shaders\PostProcess\postprocess.frag" />
+    <None Include="..\Build\Assets\Shaders\PostProcess\postprocess.prog" />
+    <None Include="..\Build\Assets\Shaders\PostProcess\postprocess.vert" />
     <None Include="..\Build\Assets\Shaders\texture_phong.vert" />
     <None Include="..\Build\Assets\Shaders\Unlit\color.frag" />
     <None Include="..\Build\Assets\Shaders\Unlit\color.prog" />
     <None Include="..\Build\Assets\Shaders\Unlit\color.vert" />
-    <None Include="..\Build\Assets\Shaders\Unlit\skybox.frag" />
-    <None Include="..\Build\Assets\Shaders\Unlit\skybox.prog" />
-    <None Include="..\Build\Assets\Shaders\Unlit\skybox.vert" />
     <None Include="..\Build\Assets\Shaders\Unlit\texture.frag" />
     <None Include="..\Build\Assets\Shaders\Unlit\texture.prog" />
     <None Include="..\Build\Assets\Shaders\Unlit\texture.vert" />
