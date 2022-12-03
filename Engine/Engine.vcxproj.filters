@@ -433,5 +433,8 @@
     <ClInclude Include="Renderer\Framebuffer.h">
       <Filter>Source\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Math\Ray.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
