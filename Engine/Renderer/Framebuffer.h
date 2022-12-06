@@ -15,7 +15,9 @@ namespace JREngine
 		bool CreateFramebuffer();
 		bool CreateDepthbuffer(int width, int height);
 
-		glm::ivec2 GetSize() const { return { m_width, m_height }; }
+		glm::ivec2 GetSize() const {
+			return { m_width, m_height }; 
+		}
 
 		void Bind();
 		void Unbind();

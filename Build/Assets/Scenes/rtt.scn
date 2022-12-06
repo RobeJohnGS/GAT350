@@ -60,8 +60,8 @@
       "components": [
         {
           "type": "ModelComponent",
-          "model_name": "Models/ogre.obj",
-          "material_name": "Materials/ogre.mtrl"
+          "model_name": "Models/Squirrel.glb",
+          "material_name": "Materials/Squirrel.mtrl"
         }
       ]
     },
@@ -99,37 +99,8 @@
       "transform": {
         "position": [
           0,
-          3,
-          1
-        ],
-        "rotation": [
-          85,
           0,
           0
-        ]
-      },
-      "components": [
-        {
-          "type": "LightComponent",
-          "color": [
-            0.0,
-            1.0,
-            0.0
-          ],
-          "type_name": "point",
-          "cutoff": 25.0,
-          "exponent": 10.0
-        }
-      ]
-    },
-    {
-      "type": "Actor",
-      "name": "Light2",
-      "transform": {
-        "position": [
-          -3,
-          3,
-          1
         ],
         "rotation": [
           85,
@@ -142,36 +113,7 @@
           "type": "LightComponent",
           "color": [
             1.0,
-            0.0,
-            0.0
-          ],
-          "type_name": "point",
-          "cutoff": 25.0,
-          "exponent": 10.0
-        }
-      ]
-    },
-    {
-      "type": "Actor",
-      "name": "Light3",
-      "transform": {
-        "position": [
-          3,
-          3,
-          1
-        ],
-        "rotation": [
-          85,
-          0,
-          0
-        ]
-      },
-      "components": [
-        {
-          "type": "LightComponent",
-          "color": [
-            0.0,
-            0.0,
+            1.0,
             1.0
           ],
           "type_name": "point",

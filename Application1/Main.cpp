@@ -58,20 +58,20 @@ int main(int argc, char** argv)
 			//actor->m_transform.position = pos;
 		}
 
-		auto program = JREngine::g_resources.Get<JREngine::Program>("shaders/fx/refraction.prog");
+		/*auto program = JREngine::g_resources.Get<JREngine::Program>("shaders/fx/refraction.prog");
 
 		if (program)
 		{
 			program->Use();
 			program->SetUniform("ri", ri);
-		}
+		}*/
 
-		/*auto program = JREngine::g_resources.Get<JREngine::Program>("shaders/postprocess/postprocess.prog");
+		auto program = JREngine::g_resources.Get<JREngine::Program>("shaders/postprocess/postprocess.prog");
 		if (program)
 		{
 			program->Use();
 			program->SetUniform("offset", JREngine::g_time.time);
-		}*/
+		}
 
 		ImGui::Begin("GUI");
 		ImGui::End();
@@ -88,7 +88,7 @@ int main(int argc, char** argv)
 			}
 		}
 		// render pass 1 (render scene to framebuffer) 
-		JREngine::g_renderer.SetViewport(0, 0, framebuffer->GetSize().x, framebuffer->GetSize().y);
+		JREngine::g_renderer.SetViewport(0, 0, framebuffer-> GetSize().x, framebuffer->GetSize().y);
 		framebuffer->Bind();
 		JREngine::g_renderer.BeginFrame();
 		scene->PreRender(JREngine::g_renderer);

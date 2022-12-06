@@ -1,6 +1,6 @@
 {
   "program": "shaders/fx/skybox.prog",
-  "cubemap": "textures/GamlaStan/",
+  "cubemap": "textures/Yokohama3/",
   "cubemap_extension":  ".jpg",
   "color": [
     1,
