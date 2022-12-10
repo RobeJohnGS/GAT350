@@ -1,7 +1,8 @@
 {
   "program": "shaders/lit/texture_normal.prog",
   "textures": [
-    "Textures/final-ground.jpg"
+    "Textures/link_goron_00_0.png",
+    "Textures/link_goron_00_0.png"
   ],
   "color": [
     1,

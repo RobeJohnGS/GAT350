@@ -1,7 +1,8 @@
 {
   "program": "shaders/lit/texture_normal.prog",
   "textures": [
-    "Textures/final-ground.jpg"
+    "Textures/GaroTextures/texture.png",
+    "Textures/GaroTextures/texture.png"
   ],
   "color": [
     1,

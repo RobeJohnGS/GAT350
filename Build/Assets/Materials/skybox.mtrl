@@ -1,6 +1,6 @@
 {
   "program": "shaders/fx/skybox.prog",
-  "cubemap": "textures/Yokohama3/",
+  "cubemap": "textures/Teide/",
   "cubemap_extension":  ".jpg",
   "color": [
     1,

@@ -1,0 +1,13 @@
+{
+  "program": "shaders/fx/reflection.prog",
+  "textures": [
+    "Textures/zelda_gi_shield_0.png",
+    "Textures/zelda_gi_shield_0.png"
+  ],
+  "color": [
+    1,
+    1,
+    1
+  ],
+  "shininess": 32
+}

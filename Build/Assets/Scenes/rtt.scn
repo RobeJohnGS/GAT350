@@ -60,7 +60,7 @@
       "components": [
         {
           "type": "ModelComponent",
-          "model_name": "Models/Squirrel.glb",
+          "model_name": "Models/Garo.glb",
           "material_name": "Materials/Squirrel.mtrl"
         }
       ]

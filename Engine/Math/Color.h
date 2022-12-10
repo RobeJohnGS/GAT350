@@ -3,9 +3,9 @@
 #include <iostream>
 #include <string>
 
-using rgba_t = uint32_t;
-using color3 = glm::vec3;
-using color4 = glm::vec4;
+//using rgba_t = uint32_t;
+//using color3 = glm::vec3;
+//using color4 = glm::vec4;
 
 namespace JREngine
 {

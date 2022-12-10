@@ -1,7 +1,8 @@
 {
   "program": "shaders/lit/texture_normal.prog",
   "textures": [
-    "Textures/final-ground.jpg"
+    "Textures/WP_A_1800.png",
+    "Textures/WP_A_1800.png"
   ],
   "color": [
     1,

@@ -224,5 +224,20 @@
     <None Include="..\Build\Assets\Shaders\Unlit\color.vert">
       <Filter>Resource Files\Shaders\Unlit</Filter>
     </None>
+    <None Include="..\Build\Assets\Scenes\final.scn">
+      <Filter>Resource Files\Scenes</Filter>
+    </None>
+    <None Include="..\Build\Assets\Materials\garo-cloak.mtrl">
+      <Filter>Resource Files\Materials</Filter>
+    </None>
+    <None Include="..\Build\Assets\Materials\link.mtrl">
+      <Filter>Resource Files\Materials</Filter>
+    </None>
+    <None Include="..\Build\Assets\Materials\shield.mtrl">
+      <Filter>Resource Files\Materials</Filter>
+    </None>
+    <None Include="..\Build\Assets\Materials\torch.mtrl">
+      <Filter>Resource Files\Materials</Filter>
+    </None>
   </ItemGroup>
 </Project>

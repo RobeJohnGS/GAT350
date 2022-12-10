@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 
 
 	// load scene 
-	auto scene = JREngine::g_resources.Get<JREngine::Scene>("Scenes/rtt.scn");
+	auto scene = JREngine::g_resources.Get<JREngine::Scene>("Scenes/final.scn");
 
 	glm::vec3 pos{ 0, 0, 0 };
 	glm::vec3 rot{ 0, 0, 0 };
@@ -55,7 +55,7 @@ int main(int argc, char** argv)
 		if (actor)
 		{
 			// move light using sin wave
-			//actor->m_transform.position = pos;
+			actor->m_transform.position = pos;
 		}
 
 		/*auto program = JREngine::g_resources.Get<JREngine::Program>("shaders/fx/refraction.prog");
@@ -74,6 +74,7 @@ int main(int argc, char** argv)
 		}
 
 		ImGui::Begin("GUI");
+		ImGui::DragFloat3("r", &pos[0], -360, 360);
 		ImGui::End();
 
 		scene->Update();
